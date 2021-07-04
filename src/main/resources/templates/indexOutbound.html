@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>OUTBOUND DATA</title>
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><span th:text="#{label.outbound.id}"></span></th>
+            <th><span th:text="#{label.outbound.type}"></span></th>
+            <th><span th:text="#{label.outbound.quantity}"></span></th>
+            <th><span th:text="#{label.outbound.checkedAt}"></span></th>
+            <th><span th:text="#{label.outbound.location}"></span></th>
+            <th><span th:text="#{label.outbound.volumeAmount}"></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="outbound : ${outboundPage.content}">
+            <td><span th:text="${outbound.id}"></span></td>
+            <td><span th:text="${outbound.type}"></span></td>
+            <td><span th:text="${outbound.quantity}"></span></td>
+            <td><span th:text="${outbound.checkedAt}"></span></td>
+            <td><span th:text="${outbound.location}"></span></td>
+            <td><span th:text="${outbound.volumeAmount}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${outboundPage.totalPages > 0}" class="pagination"
+         th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/outbounds/paginated(page=${pageNumber})}"
+           th:text="${pageNumber}"></a>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

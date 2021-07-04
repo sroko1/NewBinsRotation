@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>BINS DATA</title>
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><span th:text="#{label.binFeature.id}"></span></th>
+            <th><span th:text="#{label.binFeature.name}"></span></th>
+            <th><span th:text="#{label.binFeature.amount}"></span></th>
+            <th><span th:text="#{label.binFeature.inbounds}"></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="binFeature : ${binFeaturePage.content}">
+            <td><span th:text="${binFeature.id}"></span></td>
+            <td><span th:text="${binFeature.name}"></span></td>
+            <td><span th:text="${binFeature.amount}"></span></td>
+            <td><span th:each=" inbound, iStat: ${binFeature.inbounds}" th:text=" ${iStat.last} ? ${inbound.name}" ></span></td>
+
+
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${binFeaturePage.totalPages > 0}" class="pagination"
+         th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/binFeatures/paginatedList(page=${pageNumber})}"
+           th:text="${pageNumber}"></a>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

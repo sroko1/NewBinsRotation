@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Spring Data Example</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><span th:text="#{label.user.id}"></span></th>
+            <th><span th:text="#{label.user.login}"></span></th>
+            <th><span th:text="#{label.user.firstName}"></span></th>
+            <th><span th:text="#{label.user.lastName}"></span></th>
+            <th><span th:text="#{label.user.email}"></span></th>
+            <th><span th:text="#{label.user.roles}"></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="portalUser : ${portalUserPage.content}">
+            <td><span th:text="${portalUser.id}"></span></td>
+            <td><span th:text="${portalUser.login}"></span></td>
+            <td><span th:text="${portalUser.firstName}"></span></td>
+            <td><span th:text="${portalUser.lastName}"></span></td>
+            <td><span th:text="${portalUser.email}"></span></td>
+            <td><span th:each="role, iterStat: ${portalUser.roles}" th:text="!${iterStat.last} ? ${role.name}+',' : ${role.name}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${portalUserPage.totalPages > 0}" class="pagination"
+         th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/user/list(page=${pageNumber},size=${size})}"
+           th:text="${pageNumber}"></a>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

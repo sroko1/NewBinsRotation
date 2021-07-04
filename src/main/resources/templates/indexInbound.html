@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>INBOUND DATA</title>
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><span th:text="#{label.inbound.id}"></span></th>
+            <th><span th:text="#{label.inbound.type}"></span></th>
+            <th><span th:text="#{label.inbound.quantity}"></span></th>
+            <th><span th:text="#{label.inbound.checkedAt}"></span></th>
+            <th><span th:text="#{label.inbound.location}"></span></th>
+            <th><span th:text="#{label.inbound.volumeAmount}"></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="inbound : ${inboundPage.content}">
+            <td><span th:text="${inbound.id}"></span></td>
+            <td><span th:text="${inbound.type}"></span></td>
+            <td><span th:text="${inbound.quantity}"></span></td>
+            <td><span th:text="${inbound.checkedAt}"></span></td>
+            <td><span th:text="${inbound.location}"></span></td>
+            <td><span th:text="${inbound.volumeAmount}"></span></td>
+
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${inboundPage.totalPages > 0}" class="pagination"
+         th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/inbounds/paginated(page=${pageNumber})}"
+           th:text="${pageNumber}"></a>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>
