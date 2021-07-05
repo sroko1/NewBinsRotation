@@ -11,26 +11,33 @@
     <table class="table">
         <thead>
         <tr>
-            <th><span th:text="#{label.binFeature.id}"></span></th>
-            <th><span th:text="#{label.binFeature.name}"></span></th>
-            <th><span th:text="#{label.binFeature.amount}"></span></th>
-            <th><span th:text="#{label.binFeature.inbounds}"></span></th>
+            <th><span th:text="#{label.inbound.id}"></span></th>
+            <th><span th:text="#{label.inbound.type}"></span></th>
+            <th><span th:text="#{label.inbound.checkedAt}"></span></th>
+            <th><span th:text="#{label.inbound.location}"></span></th>
+            <th><span th:text="#{label.inbound.quantity}"></span></th>
+            <th><span th:text="#{label.inbound.binFeature.binName}"></span></th>
+            <th><span th:text="#{label.inbound.binFeature.binPrice}"></span></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="binFeature : ${binFeaturePage.content}">
-            <td><span th:text="${binFeature.id}"></span></td>
-            <td><span th:text="${binFeature.name}"></span></td>
-            <td><span th:text="${binFeature.amount}"></span></td>
-            <td><span th:each=" inbound, iStat: ${binFeature.inbounds}" th:text=" ${iStat.last} ? ${inbound.name}" ></span></td>
+        <tr th:each="inbound : ${inboundPage.content}">
+            <td><span th:text="${inbound.id}"></span></td>
+            <td><span th:text="${inbound.type}"></span></td>
+            <td><span th:text="${inbound.checkedAt}"></span></td>
+            <td><span th:text="${inbound.location}"></span></td>
+            <td><span th:text="${inbound.quantity}"></span></td>
+            <td><span th:each="binFeature, iStat: ${inbound.binsFeatures}" th:text="!${iStat.last} ? ${binFeature.name}"></span></td>
+            <td><span th:each="binFeature, iStat: ${inbound.binsFeatures}" th:text="!${iStat.last} ? ${binFeature.price}"></span></td>
+
 
 
         </tr>
         </tbody>
     </table>
-    <div th:if="${binFeaturePage.totalPages > 0}" class="pagination"
+    <div th:if="${inboundPage.totalPages > 0}" class="pagination"
          th:each="pageNumber : ${pageNumbers}">
-        <a th:href="@{/binFeatures/paginatedList(page=${pageNumber})}"
+        <a th:href="@{/inbounds/paginatedList(page=${pageNumber})}"
            th:text="${pageNumber}"></a>
     </div>
 </div>

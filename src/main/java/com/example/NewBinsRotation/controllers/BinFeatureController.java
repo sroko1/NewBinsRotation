@@ -2,6 +2,7 @@ package com.example.NewBinsRotation.controllers;
 
 import com.example.NewBinsRotation.models.BinFeature;
 
+import com.example.NewBinsRotation.models.Inbound;
 import com.example.NewBinsRotation.services.BinFeatureService;
 import com.example.NewBinsRotation.services.InboundService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,26 +58,5 @@ public class BinFeatureController {
         return "index";
     }
 
-    @RequestMapping ("/paginatedList")
-    public String getInboundListPaginated(Model model,
-                                         @RequestParam("page") Optional<Integer> page) {
-        int currentPage = page.orElse(1);
-        Page<BinFeature> binFeaturePage = binFeatureService
-                .getInboundListPaginated(
-                        PageRequest.of(currentPage - 1, 10)
-                );
 
-        model.addAttribute("binFeaturePage", binFeaturePage);
-
-        int totalPages = binFeaturePage.getTotalPages();
-        if (totalPages > 0) {
-
-            List<Integer> pageNumbers = new ArrayList<>();
-            for (int i = 1; i <= totalPages; i++) {
-                pageNumbers.add(i);
-            }
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
-        return "inboundList";
-    }
 }

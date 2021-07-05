@@ -31,8 +31,7 @@ public class BinFeatureServiceImpl implements BinFeatureService {
         return binFeatureRepository.findAll(pageable);
     }
 
-    @Override
-    public Page<BinFeature> getInboundListPaginated(Pageable pageable) {
-        return binFeatureRepository.findAll(pageable);
-    }
+
+
+
 }

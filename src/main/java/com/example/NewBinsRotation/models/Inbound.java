@@ -33,11 +33,18 @@ public class Inbound implements Serializable {
     @Column(name = "VOLUME_AMOUNT")
     private double volumeAmount;
 
+    @ManyToMany
+    @JoinTable(
+            name= "bin_feat_inbounds",
+            joinColumns = @JoinColumn(name = "bin_features_ID"),
+            inverseJoinColumns =  @JoinColumn(name = "inbounds_ID")
+    )
 
-    @ManyToMany(mappedBy = "inbounds", fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+
+    //@ManyToMany(mappedBy = "inbounds", fetch = FetchType.LAZY, cascade = {
+      //      CascadeType.PERSIST,
+       //     CascadeType.MERGE
+   // })
     private List<BinFeature> binsFeatures;
 
 

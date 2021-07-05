@@ -60,3 +60,5 @@ public class BinFeature implements Serializable {
 
 
 }
+//PRIMARY KEY(bin_features_ID, inbounds_ID)
+
