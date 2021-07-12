@@ -29,6 +29,9 @@
             <br/>
             <select th:object="${inbound}" class="form-control" th:name="inboundId">
                 <option th:each="inbound : ${inbounds}" th:value="${inbound.id}" th:text="${inbound.type}" th:selected = "${binFeature.id}==${inbound.id}">
+                </option>
+            </select>
+            <select th:object="${inbound}" class="form-control" th:name="inboundId">
                 <option th:each="inbound : ${inbounds}" th:value="${inbound.id}" th:text="${inbound.location}" th:selected = "${binFeature.id}==${inbound.id}">
                 </option>
             </select>

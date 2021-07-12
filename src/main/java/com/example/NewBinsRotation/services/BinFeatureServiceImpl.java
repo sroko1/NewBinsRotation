@@ -36,24 +36,6 @@ public class BinFeatureServiceImpl implements BinFeatureService {
    // return binFeatureList;
 //}
 
-/*
-    @Override
-    public Map<Integer, BinFeature> getBinsMap() {
-        return binsMap;
-    }
-    @Override
-    public void deleteBinFeature(Integer id){
-        binsMap.remove(id);
-    }
-    @Override
-    public BinFeature getBinFeatureById(Integer id){
-        return binsMap.get(id);
-    }
-    @Override
-    public void editBinFeature(BinFeature binFeature) {
-        binsMap.put(binFeature.getId(), binFeature);
-    }
-*/
 
 
     @Override

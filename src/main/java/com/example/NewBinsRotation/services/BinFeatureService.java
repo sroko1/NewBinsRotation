@@ -11,14 +11,15 @@ public interface BinFeatureService {
 
 
     Page<BinFeature> getBinFeaturePaginated(Pageable pageable);
-    List<BinFeature>getAllBinFeature();
+
+    List<BinFeature> getAllBinFeature();
 
 
-   void addNewBinFeature(BinFeature binFeature);
+    void addNewBinFeature(BinFeature binFeature);
 
     void deleteBinFeature(Integer id);
 
-BinFeature getBinFeatureById(Integer id);
+    BinFeature getBinFeatureById(Integer id);
 
     void editBinFeature(BinFeature binFeature);
 }

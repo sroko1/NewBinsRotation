@@ -33,34 +33,37 @@ public class BinFeatureController {
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
         return "dynamicBinFeatList";
     }
-        @DeleteMapping ("/delete")
-                public String deleteBinFeature(@RequestParam Integer id, Model model){
+
+    @PostMapping("/delete")
+    public String deleteBinFeature(@RequestParam Integer id, Model model) {
         binFeatureService.deleteBinFeature(id);
-        model.addAttribute("binsFeatures",binFeatureService.getAllBinFeature());
+        model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
         return "dynamicBinFeatList";
     }
+
     @PostMapping("/edit")
-    public String editBinFeature(@RequestParam Integer id, Model model){
+    public String editBinFeature(@RequestParam Integer id, Model model) {
         model.addAttribute("binFeature", binFeatureService.getBinFeatureById(id));
         model.addAttribute("inbounds", inboundService.getAllInbound());
         return "postBinInb";
     }
 
     @PostMapping("/save")
-    public String saveBinFeature(BinFeature binFeature, @RequestParam(name = "inboundId") Integer id){
-       binFeature.setInbounds(Collections.singletonList(inboundService.getInboundById(id)));
-       binFeatureService.editBinFeature(binFeature);
-       return "redirect:list";
+    public String saveBinFeature(BinFeature binFeature, @RequestParam Integer id) {
+        binFeature.setInbounds(Collections.singletonList(inboundService.getInboundById(id)));
+        binFeatureService.editBinFeature(binFeature);
+        return "redirect:list";
     }
 
     @GetMapping("/addNew")
-    public  String addNewBinFeature(Model model) {
+    public String addNewBinFeature(Model model) {
         model.addAttribute("binFeature", new BinFeature());
         return "postBinInb";
     }
+
     @RequestMapping("/paginated")
     public String getBinFeaturePaginated(Model model,
-                                   @RequestParam("page") Optional<Integer> page) {
+                                         @RequestParam("page") Optional<Integer> page) {
         int currentPage = page.orElse(1);
         Page<BinFeature> binFeaturePage = binFeatureService
                 .getBinFeaturePaginated(
@@ -80,7 +83,6 @@ public class BinFeatureController {
         }
         return "index";
     }
-
 
 
 }

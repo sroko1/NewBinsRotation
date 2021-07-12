@@ -36,10 +36,10 @@ public class InboundController {
         return"dynamicInboundList";
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public String deleteInbound(@RequestParam Integer id, Model model){
         inboundService.deleteInbound(id);
-        model.addAttribute("inboundsMap", inboundService.getAllInbound());
+        model.addAttribute("inbounds", inboundService.getAllInbound());
         return "dynamicInboundList";
     }
 
