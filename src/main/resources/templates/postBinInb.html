@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring MVC CRUD</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <form th:action=@{save} th:object="${binFeature}" method="post">
+        <div class="form-group">
+            <input type="hidden" th:field="*{id}">
+            <input class="form-control" placeholder="Provide Bin Name" th:field="*{name}"/>
+            <br/>
+            <input class="form-control" placeholder="Provide Bin Amount" th:field="*{amount}"/>
+            <br/>
+            <select th:object="${inbound}" class="form-control" th:name="inboundId">
+                <option th:each="inbound : ${inbounds}" th:value="${inbound.id}" th:text="${inbound.type}" th:selected = "${binFeature.id}==${inbound.id}">
+                <option th:each="inbound : ${inbounds}" th:value="${inbound.id}" th:text="${inbound.location}" th:selected = "${binFeature.id}==${inbound.id}">
+                </option>
+            </select>
+            <input type="submit" class="btn btn-primary" th:value="Save">
+        </div>
+    </form>
+</div>
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring MVC CRUD</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><span th:text="#{label.binFeature.name}"></span></th>
+            <th><span th:text="#{label.binFeature.amount}"></span></th>
+            <th><span th:text="#{label.binFeature.price}"></span></th>
+            <th><span th:text="#{label.binFeature.volume}"></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${binFeature != null}" >
+            <td><span th:text="${binFeature.name}"></span></td>
+            <td><span th:text="${binFeature.amount}"></span></td>
+            <td><span th:text="${binFeature.price}"></span></td>
+            <td><span th:text="${binFeature.volume}"></span></td>
+        </tr>
+        <tr th:unless="${binFeature == null}" th:each="binFeature : ${binsFeatures}">
+            <td><span th:text="${binFeature.name}"></span></td>
+            <td><span th:text="${binFeature.amount}"></span></td>
+            <td><span th:text="${binFeature.price}"></span></td>
+            <td><span th:text="${binFeature.volume}"></span></td>
+            <td>
+                <form th:action="@{edit}" method="post">
+                    <button th:type="submit" class="btn btn-success" th:name="id" th:value="${binFeature.id}">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{delete}" method="post">
+                    <button th:type="submit" class="btn btn-warning" th:name="id" th:value="${binFeature.id}">Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="addNew" class="btn btn-success">Add New Inbound</a>
+    <a th:href="@{/binFeatures/list}" class="btn btn-success">List of Inbounds</a>
+</div>
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

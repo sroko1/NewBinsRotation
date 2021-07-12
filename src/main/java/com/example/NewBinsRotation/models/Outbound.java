@@ -39,4 +39,5 @@ public class Outbound implements Serializable {
     private List<BinFeature> binsFeatures;
 
 
+
 }

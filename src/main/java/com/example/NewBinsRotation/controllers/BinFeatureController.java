@@ -10,11 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,10 +30,34 @@ public class BinFeatureController {
 
     @RequestMapping("/list")
     public String getBins(Model model) {
-        model.addAttribute("binFeatures", binFeatureService.getAllBinFeature());
-        return "index";
+        model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
+        return "dynamicBinFeatList";
+    }
+        @DeleteMapping ("/delete")
+                public String deleteBinFeature(@RequestParam Integer id, Model model){
+        binFeatureService.deleteBinFeature(id);
+        model.addAttribute("binsFeatures",binFeatureService.getAllBinFeature());
+        return "dynamicBinFeatList";
+    }
+    @PostMapping("/edit")
+    public String editBinFeature(@RequestParam Integer id, Model model){
+        model.addAttribute("binFeature", binFeatureService.getBinFeatureById(id));
+        model.addAttribute("inbounds", inboundService.getAllInbound());
+        return "postBinInb";
     }
 
+    @PostMapping("/save")
+    public String saveBinFeature(BinFeature binFeature, @RequestParam(name = "inboundId") Integer id){
+       binFeature.setInbounds(Collections.singletonList(inboundService.getInboundById(id)));
+       binFeatureService.editBinFeature(binFeature);
+       return "redirect:list";
+    }
+
+    @GetMapping("/addNew")
+    public  String addNewBinFeature(Model model) {
+        model.addAttribute("binFeature", new BinFeature());
+        return "postBinInb";
+    }
     @RequestMapping("/paginated")
     public String getBinFeaturePaginated(Model model,
                                    @RequestParam("page") Optional<Integer> page) {
@@ -57,6 +80,7 @@ public class BinFeatureController {
         }
         return "index";
     }
+
 
 
 }

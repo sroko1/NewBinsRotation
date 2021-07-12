@@ -8,8 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +27,41 @@ public class InboundController {
     @RequestMapping("/list")
     public String getInbounds(Model model) {
         model.addAttribute("inbounds", inboundService.getAllInbound());
-        return "indexInbound";
+        return "dynamicInboundList";
     }
+
+    @RequestMapping("/list/{id}")
+    public String getPointedInbound(@PathVariable Integer id, Model model){
+        model.addAttribute("inbounds", inboundService.getInboundById(id));
+        return"dynamicInboundList";
+    }
+
+    @DeleteMapping("/delete")
+    public String deleteInbound(@RequestParam Integer id, Model model){
+        inboundService.deleteInbound(id);
+        model.addAttribute("inboundsMap", inboundService.getAllInbound());
+        return "dynamicInboundList";
+    }
+
+    @PostMapping("/edit")
+    public String editInbound(@RequestParam Integer id, Model model){
+       model.addAttribute("inbound", inboundService.getInboundById(id));
+       return "postInbound";
+    }
+
+    @PostMapping("/save")
+    public String saveInbound(Inbound inbound){
+        inboundService.editInbound(inbound);
+        return "redirect:list";
+    }
+
+    @GetMapping("/addNew")
+    public  String addNewInbound(Model model){
+        model.addAttribute("inbound",new Inbound());
+        return "postInbound";
+    }
+
+
 
     @RequestMapping("/paginated")
     public String getInboundPaginated(Model model,

@@ -53,3 +53,5 @@ public class PortalUserServiceImpl implements PortalUserService {
     }
 
 }
+
+//th:unless="${binFeature == null}"

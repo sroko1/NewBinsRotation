@@ -2,15 +2,23 @@ package com.example.NewBinsRotation.services;
 
 import com.example.NewBinsRotation.models.BinFeature;
 
-import com.example.NewBinsRotation.models.Inbound;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import java.util.*;
 
 public interface BinFeatureService {
 
-    List<BinFeature>getAllBinFeature();
-    Page<BinFeature> getBinFeaturePaginated(Pageable pageable);
 
+    Page<BinFeature> getBinFeaturePaginated(Pageable pageable);
+    List<BinFeature>getAllBinFeature();
+
+
+   void addNewBinFeature(BinFeature binFeature);
+
+    void deleteBinFeature(Integer id);
+
+BinFeature getBinFeatureById(Integer id);
+
+    void editBinFeature(BinFeature binFeature);
 }

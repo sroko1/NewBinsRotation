@@ -5,33 +5,90 @@ import com.example.NewBinsRotation.models.BinFeature;
 
 import com.example.NewBinsRotation.repositories.BinFeatureRepository;
 
-import com.example.NewBinsRotation.repositories.InboundRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BinFeatureServiceImpl implements BinFeatureService {
 
-@Autowired
-    InboundRepository inboundRepository;
+
     @Autowired
     BinFeatureRepository binFeatureRepository;
-
-    @Override
-    public List<BinFeature> getAllBinFeature() {
-        return binFeatureRepository.findAll();
-    }
 
     @Override
     public Page<BinFeature> getBinFeaturePaginated(Pageable pageable) {
         return binFeatureRepository.findAll(pageable);
     }
 
+  //  @Override
+  //  public List<BinFeature> getAllBinFeature() {
+  ///      return binFeatureRepository.findAll();
+  //  }
+  // @Override
+ //   public List<BinFeature> getAllBinFeature() {
+  //  List<BinFeature> binFeatureList = new ArrayList<>();
+   //  binFeatureRepository.findAll().forEach(binFeatureList::add);
+   // return binFeatureList;
+//}
+
+/*
+    @Override
+    public Map<Integer, BinFeature> getBinsMap() {
+        return binsMap;
+    }
+    @Override
+    public void deleteBinFeature(Integer id){
+        binsMap.remove(id);
+    }
+    @Override
+    public BinFeature getBinFeatureById(Integer id){
+        return binsMap.get(id);
+    }
+    @Override
+    public void editBinFeature(BinFeature binFeature) {
+        binsMap.put(binFeature.getId(), binFeature);
+    }
+*/
+
+
+    @Override
+    public List<BinFeature>getAllBinFeature() {
+      return (List<BinFeature>)  binFeatureRepository.findAll();
+    }
+
+    @Override
+    public void addNewBinFeature(BinFeature binFeature) {
+        binFeatureRepository.save(binFeature);
+    }
+
+    @Override
+    public void deleteBinFeature(Integer id) {
+        binFeatureRepository.deleteById(id);
+
+    }
+
+    @Override
+    public BinFeature getBinFeatureById(Integer id) {
+        return binFeatureRepository.getById(id);
+    }
+
+    @Override
+    public void editBinFeature(BinFeature binFeature) {
+        binFeatureRepository.save(binFeature);
 
 
 
+    }
+
+    // @Override
+  //public BinFeature addBinFeature(BinFeature binFeature) {
+   // binFeature = binFeatureRepository.save(binFeature);
+   // return binFeature;
+  //  }
 }
+

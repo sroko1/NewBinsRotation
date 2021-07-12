@@ -34,8 +34,12 @@ public class BinFeature implements Serializable {
     private double price;
     @Column(name = "AMOUNT ")
     private int amount;
+    @Column(name = "VOLUME ")
+    private double volume;
     @Column(name = "LEASING_PRICE ")
     private double leasingPrice;
+
+
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "bin_features",
@@ -46,6 +50,7 @@ public class BinFeature implements Serializable {
                     @JoinColumn(name = "inbounds_ID", referencedColumnName = "ID",
                             nullable = false, updatable = false)})
     private List<Inbound> inbounds;
+
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
