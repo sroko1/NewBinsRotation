@@ -35,12 +35,13 @@ public class InboundServiceImpl implements InboundService {
     @Override
     public void deleteInbound(Integer id) {
         inboundRepository.deleteById(id);
+
     }
 
 
     @Override
-    public Inbound getInboundById(Integer id) {
-        return inboundRepository.getById(id);
+    public Optional<Inbound> getInboundById(Integer id) {
+        return inboundRepository.findById(id);
     }
 
     @Override

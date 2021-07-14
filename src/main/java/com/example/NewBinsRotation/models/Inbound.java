@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Table(name = "inbounds")
 public class Inbound implements Serializable {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
     private int id;
@@ -34,7 +34,7 @@ public class Inbound implements Serializable {
     @Column(name = "VOLUME_AMOUNT")
     private double volumeAmount;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name= "bin_feat_inbounds",
             joinColumns = @JoinColumn(name = "bin_features_ID"),

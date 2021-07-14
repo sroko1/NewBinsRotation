@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,7 @@ public class BinFeatureController {
 
     @PostMapping("/delete")
     public String deleteBinFeature(@RequestParam Integer id, Model model) {
-        binFeatureService.deleteBinFeature(id);
+    binFeatureService.deleteBinFeature(id);
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
         return "dynamicBinFeatList";
     }
@@ -50,7 +51,7 @@ public class BinFeatureController {
 
     @PostMapping("/save")
     public String saveBinFeature(BinFeature binFeature, @RequestParam Integer id) {
-        binFeature.setInbounds(Collections.singletonList(inboundService.getInboundById(id)));
+        binFeatureService.getBinFeatureById(id);
         binFeatureService.editBinFeature(binFeature);
         return "redirect:list";
     }

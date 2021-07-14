@@ -41,20 +41,20 @@ public class BinFeature implements Serializable {
 
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "bin_features",
+    @ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH})
+    @JoinTable(name = "bin_feat_inbounds",
             joinColumns = {
                     @JoinColumn(name = "bin_features_ID", referencedColumnName = "ID",
-                            nullable = false, updatable = false)},
+                            nullable = false)},
             inverseJoinColumns = {
                     @JoinColumn(name = "inbounds_ID", referencedColumnName = "ID",
-                            nullable = false, updatable = false)})
+                            nullable = false)})
     private List<Inbound> inbounds;
 
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "bin_features",
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH})
+    @JoinTable(name = "bin_feat_outbounds",
             joinColumns = {
                     @JoinColumn(name = "bin_features_ID", referencedColumnName = "ID",
                             nullable = false, updatable = false)},

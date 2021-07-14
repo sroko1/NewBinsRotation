@@ -19,7 +19,7 @@ public interface BinFeatureService {
 
     void deleteBinFeature(Integer id);
 
-    BinFeature getBinFeatureById(Integer id);
+    Optional<BinFeature> getBinFeatureById(Integer id);
 
     void editBinFeature(BinFeature binFeature);
 }

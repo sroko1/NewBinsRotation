@@ -20,7 +20,7 @@
 </head>
 <body>
 <div class="container">
-    <form th:action=@{save} th:object="${inbound}" method="post">
+    <form th:action="@{save}" th:object="${inbound}" method="post">
         <div class="form-group">
             <input type="hidden" th:field="*{id}">
             <input class="form-control" placeholder="Provide Inbound Type" th:field="*{type}"/>

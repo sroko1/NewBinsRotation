@@ -20,22 +20,16 @@
 </head>
 <body>
 <div class="container">
-    <form th:action=@{save} th:object="${binFeature}" method="post">
+    <form th:action="@{save}" th:object="${binFeature}" method="post">
         <div class="form-group">
             <input type="hidden" th:field="*{id}">
-            <input class="form-control" placeholder="Provide Bin Name" th:field="*{name}"/>
+            <input class="form-control" placeholder="Provide Bin Name" th:field="*{name}">
             <br/>
-            <input class="form-control" placeholder="Provide Bin Amount" th:field="*{amount}"/>
+            <input class="form-control" placeholder="Provide Bin Amount" required="true" autofocus="true" th:field="*{amount}">
             <br/>
-            <select th:object="${inbound}" class="form-control" th:name="inboundId">
-                <option th:each="inbound : ${inbounds}" th:value="${inbound.id}" th:text="${inbound.type}" th:selected = "${binFeature.id}==${inbound.id}">
-                </option>
-            </select>
-            <select th:object="${inbound}" class="form-control" th:name="inboundId">
-                <option th:each="inbound : ${inbounds}" th:value="${inbound.id}" th:text="${inbound.location}" th:selected = "${binFeature.id}==${inbound.id}">
-                </option>
-            </select>
-            <input type="submit" class="btn btn-primary" th:value="Save">
+            <input class="form-control" placeholder="Provide Bin Price" required="true" autofocus="true" th:field="*{price}">
+            <br/>
+            <input type="submit" class="btn btn-primary" th:value="Save"/>
         </div>
     </form>
 </div>

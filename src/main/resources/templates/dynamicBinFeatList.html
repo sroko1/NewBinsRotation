@@ -32,12 +32,6 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${binFeature != null}" >
-            <td><span th:text="${binFeature.name}"></span></td>
-            <td><span th:text="${binFeature.amount}"></span></td>
-            <td><span th:text="${binFeature.price}"></span></td>
-            <td><span th:text="${binFeature.volume}"></span></td>
-        </tr>
         <tr th:unless="${binFeature == null}" th:each="binFeature : ${binsFeatures}">
             <td><span th:text="${binFeature.name}"></span></td>
             <td><span th:text="${binFeature.amount}"></span></td>

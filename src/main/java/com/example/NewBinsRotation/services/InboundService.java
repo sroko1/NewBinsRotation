@@ -16,9 +16,9 @@ public interface InboundService {
     Page<Inbound> getInboundListPaginated(Pageable pageable);
 
 
-    void deleteInbound(Integer id);
+   void deleteInbound(Integer id);
 
-  Inbound getInboundById(Integer id);
+  Optional<Inbound> getInboundById(Integer id);
 
     void editInbound(Inbound inbound);
     void addNewInbound(Inbound inbound);

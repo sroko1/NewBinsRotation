@@ -32,12 +32,6 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${inbound != null}" >
-            <td><span th:text="${inbound.type}"></span></td>
-            <td><span th:text="${inbound.checkedAt}"></span></td>
-            <td><span th:text="${inbound.quantity}"></span></td>
-            <td><span th:text="${inbound.location}"></span></td>
-        </tr>
         <tr th:unless="${inbound == null}" th:each="inbound : ${inbounds}">
             <td><span th:text="${inbound.type}"></span></td>
             <td><span th:text="${inbound.checkedAt}"></span></td>

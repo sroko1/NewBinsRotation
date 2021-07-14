@@ -16,7 +16,7 @@ import java.util.List;
 
 @Table(name = "outbounds")
 public class Outbound implements Serializable {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
     private int id;
@@ -32,10 +32,12 @@ public class Outbound implements Serializable {
     private double volumeAmount;
 
 
-    @ManyToMany(mappedBy = "outbounds", fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinTable(
+            name= "bin_feat_outbounds",
+            joinColumns = @JoinColumn(name = "bin_features_ID"),
+            inverseJoinColumns =  @JoinColumn(name = "outbounds_ID")
+    )
     private List<BinFeature> binsFeatures;
 
 
