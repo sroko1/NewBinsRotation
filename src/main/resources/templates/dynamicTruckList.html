@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+  <title>Spring MVC CRUD</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+  <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+        th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+        rel="stylesheet" media="screen"/>
+
+  <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+          th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+  <link href="../static/css/spring-core.css"
+        th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th><span th:text="#{label.truck.trailerType}"></span></th>
+      <th><span th:text="#{label.truck.regNumber}"></span></th>
+      <th><span th:text="#{label.truck.trailerMaxVolume}"></span></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:unless="${truck == null}" th:each="truck : ${trucks}">
+      <td><span th:text="${truck.trailerType}"></span></td>
+      <td><span th:text="${truck.regNumber}"></span></td>
+      <td><span th:text="${truck.trailerMaxVolume}"></span></td>
+      <td>
+        <form th:action="@{edit}" method="post">
+          <button th:type="submit" class="btn btn-success" th:name="id" th:value="${truck.id}">Edit</button>
+        </form>
+      </td>
+      <td>
+        <form th:action="@{delete}" method="post">
+          <button th:type="submit" class="btn btn-warning" th:name="id" th:value="${truck.id}">Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="addNew" class="btn btn-success">Add New Truck</a>
+  <a th:href="@{/trucks/list}" class="btn btn-success">List of Trucks</a>
+</div>
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

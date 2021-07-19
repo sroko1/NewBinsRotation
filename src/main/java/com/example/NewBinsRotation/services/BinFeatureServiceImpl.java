@@ -26,19 +26,6 @@ public class BinFeatureServiceImpl implements BinFeatureService {
         return binFeatureRepository.findAll(pageable);
     }
 
-  //  @Override
-  //  public List<BinFeature> getAllBinFeature() {
-  ///      return binFeatureRepository.findAll();
-  //  }
-  // @Override
- //   public List<BinFeature> getAllBinFeature() {
-  //  List<BinFeature> binFeatureList = new ArrayList<>();
-   //  binFeatureRepository.findAll().forEach(binFeatureList::add);
-   // return binFeatureList;
-//}
-
-
-
     @Override
     public List<BinFeature>getAllBinFeature() {
       return (List<BinFeature>)  binFeatureRepository.findAll();
@@ -49,12 +36,9 @@ public class BinFeatureServiceImpl implements BinFeatureService {
         binFeatureRepository.save(binFeature);
     }
 
-
     @Override
     public void deleteBinFeature(Integer id) {
         binFeatureRepository.deleteById(id);
-
-
     }
 
     @Override
@@ -65,15 +49,6 @@ public class BinFeatureServiceImpl implements BinFeatureService {
     @Override
     public void editBinFeature(BinFeature binFeature) {
         binFeatureRepository.save(binFeature);
-
-
-
     }
-
-    // @Override
-  //public BinFeature addBinFeature(BinFeature binFeature) {
-   // binFeature = binFeatureRepository.save(binFeature);
-   // return binFeature;
-  //  }
 }
 

@@ -40,6 +40,7 @@ public class Outbound implements Serializable {
     )
     private List<BinFeature> binsFeatures;
 
-
-
+    @ManyToOne
+    @JoinColumn(name = "T_ID",nullable = false)
+    private Truck truck;
 }

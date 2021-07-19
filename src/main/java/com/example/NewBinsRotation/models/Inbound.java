@@ -40,14 +40,14 @@ public class Inbound implements Serializable {
             joinColumns = @JoinColumn(name = "bin_features_ID"),
             inverseJoinColumns =  @JoinColumn(name = "inbounds_ID")
     )
-
-
-    //@ManyToMany(mappedBy = "inbounds", fetch = FetchType.LAZY, cascade = {
-      //      CascadeType.PERSIST,
-       //     CascadeType.MERGE
-   // })
     private List<BinFeature> binsFeatures;
 
-
+   @ManyToOne
+    @JoinColumn(name = "T_ID", nullable = false)
+    private Truck truck;
 
 }
+//mysql w trucku  ->INBOUND_ID smallint not null,
+//OUTBOUND_ID  smallint not null,
+//foreign key (INBOUND_ID) references inbounds(ID),
+//foreign key (OUTBOUND_ID) references outbounds(ID)

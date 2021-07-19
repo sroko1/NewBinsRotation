@@ -7,8 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,37 @@ public class OutboundController {
     @RequestMapping("/list")
     public String getOutbounds(Model model) {
         model.addAttribute("outbounds", outboundService.getAllOutbound());
-        return "indexOutbound";
+        return "dynamicOutboundList";
+    }
+    @RequestMapping("/list/{id}")
+    public String getPointedOutbound(@PathVariable Integer id, Model model){
+        model.addAttribute("outbounds", outboundService.getOutboundById(id));
+        return"dynamicOutboundList";
+    }
+
+    @PostMapping("/delete")
+    public String deleteOutbound(@RequestParam Integer id, Model model){
+        outboundService.deleteOutbound(id);
+        model.addAttribute("outbounds", outboundService.getAllOutbound());
+        return "dynamicOutboundList";
+    }
+
+    @PostMapping("/edit")
+    public String editOutbound(@RequestParam Integer id, Model model){
+        model.addAttribute("outbound", outboundService.getOutboundById(id));
+        return "postOutbound";
+    }
+
+    @PostMapping("/save")
+    public String saveOutbound(Outbound outbound){
+        outboundService.editOutbound(outbound);
+        return "redirect:list";
+    }
+
+    @GetMapping("/addNew")
+    public  String addNewOutbound(Model model){
+        model.addAttribute("outbound",new Outbound());
+        return "postOutbound";
     }
 
     @RequestMapping("/paginated")

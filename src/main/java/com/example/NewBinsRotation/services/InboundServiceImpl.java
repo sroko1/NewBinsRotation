@@ -13,8 +13,12 @@ import java.util.Optional;
 @Service
 public class InboundServiceImpl implements InboundService {
 
-    @Autowired
+    final
     InboundRepository inboundRepository;
+
+    public InboundServiceImpl(InboundRepository inboundRepository) {
+        this.inboundRepository = inboundRepository;
+    }
 
     @Override
     public List<Inbound> getAllInbound() {

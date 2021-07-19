@@ -24,12 +24,15 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a th:href="@{/home}">HOME</a></li>
                     <li class="active"><a th:href="@{/user/list}">USERS</a></li>
+                    <li class="active"><a th:href="@{/user/register}">REGISTER</a></li>
                     <li class="active"><a th:href="@{/binFeatures/paginated}">BINS</a></li>
                     <li class="active"><a th:href="@{/binFeatures/list}">BIN EDIT</a></li>
                     <li class="active"><a th:href="@{/inbounds/paginated}">INBOUNDS</a></li>
                     <li class="active"><a th:href="@{/inbounds/list}">INB EDIT</a></li>
                     <li class="active"><a th:href="@{/outbounds/paginated}">OUTBOUNDS</a></li>
+                    <li class="active"><a th:href="@{/outbounds/list}">OUT EDIT</a></li>
                     <li class="active"><a th:href="@{/inbounds/paginatedList}">INBOUND LIST</a></li>
+                    <li class="active"><a th:href="@{/trucks/list}">TRUCK LIST</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active" sec:authorize="${!isAuthenticated()}"><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"/> Log In</a></li>

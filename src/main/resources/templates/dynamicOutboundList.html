@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring MVC CRUD</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><span th:text="#{label.outbound.type}"></span></th>
+            <th><span th:text="#{label.outbound.checkedAt}"></span></th>
+            <th><span th:text="#{label.outbound.quantity}"></span></th>
+            <th><span th:text="#{label.outbound.location}"></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:unless="${outbound == null}" th:each="outbound : ${outbounds}">
+            <td><span th:text="${outbound.type}"></span></td>
+            <td><span th:text="${outbound.checkedAt}"></span></td>
+            <td><span th:text="${outbound.quantity}"></span></td>
+            <td><span th:text="${outbound.location}"></span></td>
+            <td>
+                <form th:action="@{edit}" method="post">
+                    <button th:type="submit" class="btn btn-success" th:name="id" th:value="${outbound.id}">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{delete}" method="post">
+                    <button th:type="submit" class="btn btn-warning" th:name="id" th:value="${outbound.id}">Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="addNew" class="btn btn-success">Add New Outbound</a>
+    <a th:href="@{/outbounds/list}" class="btn btn-success">List of Outbounds</a>
+</div>
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

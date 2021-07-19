@@ -20,7 +20,7 @@ import java.util.Collection;
 public class HomeController {
 
     @Autowired
-    PortalUserService userService;
+     PortalUserService userService;
 
     @GetMapping("/home")
     public String homePage() {
