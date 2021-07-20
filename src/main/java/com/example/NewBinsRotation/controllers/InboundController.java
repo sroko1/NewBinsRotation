@@ -4,6 +4,8 @@ package com.example.NewBinsRotation.controllers;
 import com.example.NewBinsRotation.models.BinFeature;
 import com.example.NewBinsRotation.models.Inbound;
 import com.example.NewBinsRotation.services.InboundService;
+import com.example.NewBinsRotation.services.TruckService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ import java.util.Optional;
 @RequestMapping("/inbounds")
 public class InboundController {
 
+    @Autowired
+    TruckService truckService;
     private final InboundService inboundService;
 
     public InboundController(InboundService inboundService) {
@@ -46,6 +50,7 @@ public class InboundController {
     @PostMapping("/edit")
     public String editInbound(@RequestParam Integer id, Model model){
        model.addAttribute("inbound", inboundService.getInboundById(id));
+       model.addAttribute("truck", truckService.getTruckById(id));
        return "postInbound";
     }
 

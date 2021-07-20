@@ -30,7 +30,7 @@ public class TruckController {
         return "dynamicTruckList";
     }
     @PostMapping("/delete")
-    public String deleteBinFeature(@RequestParam Integer id, Model model) {
+    public String deleteTruck(@RequestParam Integer id, Model model) {
       truckService.deleteTruck(id);
         model.addAttribute("trucks", truckService.getAllTruck());
         return "dynamicTruckList";
@@ -40,7 +40,7 @@ public class TruckController {
     public String editBinFeature(@RequestParam Integer id, Model model) {
         model.addAttribute("truck", truckService.getTruckById(id));
         model.addAttribute("inbounds", inboundService.getAllInbound());
-        model.addAttribute("outbounds", inboundService.getAllInbound());
+        model.addAttribute("outbounds",outboundService.getAllOutbound());
         return "postTruck";
     }
 
