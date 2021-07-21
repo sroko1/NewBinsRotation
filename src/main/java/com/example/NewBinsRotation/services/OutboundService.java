@@ -21,6 +21,7 @@ public interface OutboundService {
     void editOutbound(Outbound outbound);
 
     void addNewOutbound(Outbound outbound);
+
 }
 
 

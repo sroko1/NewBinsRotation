@@ -3,6 +3,8 @@ package com.example.NewBinsRotation.controllers;
 
 import com.example.NewBinsRotation.models.BinFeature;
 import com.example.NewBinsRotation.models.Inbound;
+import com.example.NewBinsRotation.models.Truck;
+import com.example.NewBinsRotation.services.BinFeatureService;
 import com.example.NewBinsRotation.services.InboundService;
 import com.example.NewBinsRotation.services.TruckService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,10 @@ public class InboundController {
 
     @Autowired
     TruckService truckService;
+
+    @Autowired
+    BinFeatureService binFeatureService;
+
     private final InboundService inboundService;
 
     public InboundController(InboundService inboundService) {
@@ -64,6 +70,14 @@ public class InboundController {
     public  String addNewInbound(Model model){
         model.addAttribute("inbound",new Inbound());
         return "postInbound";
+    }
+
+    @RequestMapping("/form")
+    public String drawForm(Model model){
+        model.addAttribute("inbound", new Inbound());
+        model.addAttribute("trucks", truckService.getAllTruck());
+        model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
+        return "testForm";
     }
 
 

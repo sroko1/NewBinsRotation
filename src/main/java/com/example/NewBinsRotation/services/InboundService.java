@@ -22,6 +22,7 @@ public interface InboundService {
 
     void editInbound(Inbound inbound);
     void addNewInbound(Inbound inbound);
+    void drawForm(Inbound inbound);
 }
 
 

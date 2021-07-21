@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Spring Data Example</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs12 col-sm8 col-md6 col-sm-offset-2 col-md-offset3">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="*{inbound.location}">LOCATION</label>
+                        <select id="*{inbound.location}" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>Dortmund</option>
+                            <option>Liberec</option>
+                            <option>Poznan</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="*{truck.regNumber}">REGISTRATION NUMBER</label>
+                        <input type="text" class="form-control" id="*{truck.regNumber}" placeholder="Reg Number">
+                    </div>
+                </div>
+                <div class="form-row">
+                     <div class="form-group col-md-6">
+                         <label for="*{binFeature}">BINS</label>
+                         <select id="*{binFeature}" class="form-control">
+                             <option selected>Choose...</option>
+                             <option>AB 1234</option>
+                             <option>AB 2345</option>
+                             <option>AB 3456</option>
+                             <option>AB 4567</option>
+                         </select>
+                         <span class="input-group-addon"></span>
+                         <select id="*{binFeature}" class="form-control">
+                             <option selected>Choose...</option>
+                             <option>BC 1234</option>
+                             <option>BR 2345</option>
+                             <option>UY 3456</option>
+                             <option>OK 4567</option>
+                         </select>
+                         <span class="input-group-addon"></span>
+                         <select id="*{binFeature}" class="form-control">
+                             <option selected>Choose...</option>
+                             <option>CF 1234</option>
+                             <option>CS 2345</option>
+                             <option>RF 3456</option>
+                             <option>XD 4567</option>
+                         </select>
+                         <span class="input-group-addon"></span>
+                         <select id="*{binFeature}" class="form-control">
+                             <option selected>Choose...</option>
+                             <option>DE 1234</option>
+                             <option>FG 2345</option>
+                             <option>VJ 3456</option>
+                             <option>SA 4567</option>
+                         </select>
+                         <span class="input-group-addon"></span>
+                     </div>
+                  <div class="form-group col-md-4">
+                    <label for="*{binFeature.amount}">AMOUNT</label>
+                    <input type="text" class="form-control" id="*{binFeature.amount}" placeholder="78">
+                      <span class="input-group-addon"></span>
+                    <input type="text" class="form-control" id="*{binFeature.amount}" placeholder="78">
+                      <span class="input-group-addon"></span>
+                    <input type="text" class="form-control" id="*{binFeature.amount}" placeholder="78">
+                      <span class="input-group-addon"></span>
+                    <input type="text" class="form-control" id="*{binFeature.amount}" placeholder="78">
+                      <span class="input-group-addon"></span>
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="*{inbound.checkAt}">DATE OF INBOUND</label>
+                        <input type="text" class="form-control" id="*{inbound.checkAt}">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="*{inbound.type}">TYPE OF BINS</label>
+                        <select id="*{inbound.type}" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>HOMOGENOUS</option>
+                            <option>MIX</option>
+                            <option>WOODEN</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="*{truck.trailerType}">TRAILER TYPE</label>
+                        <select id="*{truck.trailerType}" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>MEGA</option>
+                            <option>NORMAL</option>
+                            <option>TANDEM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                            Check me out
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">PROCEED</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

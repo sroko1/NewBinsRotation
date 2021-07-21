@@ -57,4 +57,9 @@ public class InboundServiceImpl implements InboundService {
     public void addNewInbound(Inbound inbound){
         inboundRepository.save(inbound);
     }
+
+    @Override
+    public void drawForm(Inbound inbound) { inboundRepository.save(inbound);
+
+    }
 }

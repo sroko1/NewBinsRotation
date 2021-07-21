@@ -29,6 +29,7 @@ public class BinFeatureController {
     @Autowired
     InboundService inboundService;
 
+
     @RequestMapping("/list")
     public String getBins(Model model) {
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
