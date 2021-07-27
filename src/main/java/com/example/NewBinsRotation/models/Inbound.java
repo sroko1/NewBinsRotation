@@ -4,12 +4,12 @@ package com.example.NewBinsRotation.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 
 @Data
@@ -28,7 +28,8 @@ public class Inbound implements Serializable {
     @Column(name = "QUANTITY")
     private int quantity;
     @Column(name = "CHECKED_AT")
-    private LocalDateTime checkedAt;
+    @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
+    private Date checkedAt;
     @Column(name = "LOCATION")
     private String location;
     @Column(name = "VOLUME_AMOUNT")

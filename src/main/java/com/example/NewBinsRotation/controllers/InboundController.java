@@ -72,12 +72,12 @@ public class InboundController {
         return "postInbound";
     }
 
-    @RequestMapping("/form")
+    @GetMapping("/form")
     public String drawForm(Model model){
         model.addAttribute("inbound", new Inbound());
         model.addAttribute("trucks", truckService.getAllTruck());
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
-        return "testForm";
+        return "draw";
     }
 
 
