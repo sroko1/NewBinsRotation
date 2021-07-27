@@ -75,6 +75,7 @@ public class InboundController {
     @GetMapping("/form")
     public String drawForm(Model model){
         model.addAttribute("inbound", new Inbound());
+        model.addAttribute("inbounds", inboundService.getAllInbound());
         model.addAttribute("trucks", truckService.getAllTruck());
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
         return "draw";
