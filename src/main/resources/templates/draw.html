@@ -14,7 +14,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
         <a class="navbar-brand" href="/">FORMULA</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -44,15 +45,28 @@
             <form th:action="@{form}" th:object="${inbound}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                            <select class="form-control" th:field="*{location}">
-                                <option value="0">Select Inbound Location</option>
-                                <option th:each="inbound : ${inbounds}" th:value="${inbound.id}"
-                                        th:text="${inbound.location}"></option>
-                            </select>
+                        <select class="form-control" th:field="*{location}">
+                            <option value="0">Select Inbound Location</option>
+                            <option th:each="inbound : ${inbounds}" th:value="${inbound.id}"
+                                    th:text="${inbound.location}"></option>
+                        </select>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-8">
+                        <select class="form-control" th:field="*{binsFeatures}">
+                            <option value="0">Select BIN type</option>
+                            <option th:each="binFeature : ${binsFeatures}" th:value="${binFeature.id}"
+                                    th:text="${binFeature.name}"></option>
+                        </select>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-dumpster"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
                         <input type="text" th:field="*{quantity}"
                                class="form-control input-lg"
                                placeholder="amount"
@@ -64,54 +78,71 @@
                         </span>
                         <span class="input-group-addon"></span>
                     </div>
-                    <div class="form-group col-md-8">
-                        <select class="form-control" th:field="*{binsFeatures}">
-                            <option value="0">Select BIN type</option>
-                            <option th:each="binFeature : ${binsFeatures}" th:value="${binFeature.id}"
-                                    th:text="${binFeature.name}"></option>
-                        </select>
-                    </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-8">
                         <select class="form-control" th:field="*{type}">
                             <option value="0">Select Type of Inbound</option>
                             <option th:each="inbound : ${inbounds}" th:value="${inbound.id}"
                                     th:text="${inbound.type}"></option>
                         </select>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-truck-loading"></i></span>
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
                         <select class="form-control" th:field="*{truck}">
                             <option value="0">Select Type of Trailer</option>
                             <option th:each="truck : ${trucks}" th:value="${truck.id}"
                                     th:text="${truck.trailerType}"></option>
                         </select>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-truck-moving"></i></span>
+                        </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <input type="date" th:field="*{checkedAt}"
-                                   class="form-control input-lg"
-                                   placeholder="checkedAt"
-                                   required="true">
-                            <span th:if="${#fields.hasErrors('checkedAt')}"
-                                  th:errors="*{checkedAt}"
-                                  class="text-danger">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input type="date" th:field="*{checkedAt}"
+                               class="form-control input-lg"
+                               placeholder="checkedAt"
+                               required="true">
+                        <span th:if="${#fields.hasErrors('checkedAt')}"
+                              th:errors="*{checkedAt}"
+                              class="text-danger">
                             Date Error
                         </span>
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                </div>
-                            </div>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">
-                                Check me out
-                            </label>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input type="regNumber" th:field="*{truck}"
+                               class="form-control input-lg"
+                               placeholder="regNumber"
+                               required="true">
+                        <span th:if="${#fields.hasErrors('truck.regNumber')}"
+                              th:errors="*{regNumber}"
+                              class="text-danger">
+                                  Registration No. Error
+                                </span>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-sort-numeric-up"></i></span>
                         </div>
                     </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                            Check me out
+                        </label>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary">PROCEED</button>
             </form>
         </div>
