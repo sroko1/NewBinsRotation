@@ -5,6 +5,7 @@ import com.example.NewBinsRotation.models.BinFeature;
 import com.example.NewBinsRotation.models.Inbound;
 import com.example.NewBinsRotation.services.BinFeatureService;
 import com.example.NewBinsRotation.services.InboundService;
+import com.example.NewBinsRotation.services.TruckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +30,8 @@ public class BinFeatureController {
     @Autowired
     InboundService inboundService;
 
+    @Autowired
+    TruckService truckService;
 
     @RequestMapping("/list")
     public String getBins(Model model) {
@@ -47,6 +50,7 @@ public class BinFeatureController {
     public String editBinFeature(@RequestParam Integer id, Model model) {
         model.addAttribute("binFeature", binFeatureService.getBinFeatureById(id));
         model.addAttribute("inbounds", inboundService.getAllInbound());
+        model.addAttribute("trucks", truckService.getAllTruck());
         return "postBinInb";
     }
 

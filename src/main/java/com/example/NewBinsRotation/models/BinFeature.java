@@ -4,6 +4,7 @@ package com.example.NewBinsRotation.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -64,6 +65,5 @@ public class BinFeature implements Serializable {
     private List<Outbound> outbounds;
 
 
-}
-//PRIMARY KEY(bin_features_ID, inbounds_ID)
+    }
 

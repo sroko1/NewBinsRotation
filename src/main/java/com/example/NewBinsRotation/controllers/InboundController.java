@@ -7,7 +7,6 @@ import com.example.NewBinsRotation.models.Truck;
 import com.example.NewBinsRotation.services.BinFeatureService;
 import com.example.NewBinsRotation.services.InboundService;
 import com.example.NewBinsRotation.services.TruckService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -22,15 +21,16 @@ import java.util.Optional;
 @RequestMapping("/inbounds")
 public class InboundController {
 
-    @Autowired
-    TruckService truckService;
 
-    @Autowired
-    BinFeatureService binFeatureService;
+   private final TruckService truckService;
+
+    private final BinFeatureService binFeatureService;
 
     private final InboundService inboundService;
 
-    public InboundController(InboundService inboundService) {
+    public InboundController(TruckService truckService, BinFeatureService binFeatureService, InboundService inboundService) {
+        this.truckService = truckService;
+        this.binFeatureService = binFeatureService;
         this.inboundService = inboundService;
     }
 
@@ -57,6 +57,7 @@ public class InboundController {
     public String editInbound(@RequestParam Integer id, Model model){
        model.addAttribute("inbound", inboundService.getInboundById(id));
        model.addAttribute("truck", truckService.getTruckById(id));
+       model.addAttribute("binsFeatures",binFeatureService.getBinFeatureById(id));
        return "postInbound";
     }
 
@@ -72,13 +73,22 @@ public class InboundController {
         return "postInbound";
     }
 
-    @GetMapping("/form")
-    public String drawForm(Model model){
+    @RequestMapping("/form")
+    public String addNewData(Model model){
         model.addAttribute("inbound", new Inbound());
+
         model.addAttribute("inbounds", inboundService.getAllInbound());
         model.addAttribute("trucks", truckService.getAllTruck());
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
-        return "draw";
+        return "postForm";
+    }
+
+    @PostMapping("/saveForm")
+    public String saveData( Inbound inbound, BinFeature binFeature, Truck truck ){
+       inboundService.editInbound(inbound);
+        binFeatureService.editBinFeature(binFeature);
+        truckService.editTruck(truck);
+        return "redirect:list";
     }
 
 

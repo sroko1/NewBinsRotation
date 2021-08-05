@@ -42,12 +42,12 @@
 <div class="container">
     <div class="row" style="margin-top:20px">
         <div class="col-xs12 col-sm8 col-md6 col-sm-offset-2 col-md-offset3">
-            <form th:action="@{form}" th:object="${inbound}" method="post">
+            <form th:action="@{saveForm}" th:object="${inbound}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <select class="form-control" th:field="*{location}">
                             <option value="0">Select Inbound Location</option>
-                            <option th:each="inbound : ${inbounds}" th:value="${inbound.id}"
+                            <option th:each="inbound : ${inbounds}" th:value="${inbound.location}"
                                     th:text="${inbound.location}"></option>
                         </select>
                         <div class="input-group-append">
@@ -69,12 +69,12 @@
                     <div class="form-group col-md-4">
                         <input type="amount" th:field="*{binsFeatures}"
                                class="form-control input-lg"
-                               placeholder="Amount"
+                               placeholder="amount"
                                required="true">
                         <span th:if="${#fields.hasErrors('binsFeatures')}"
                               th:errors="*{amount}"
                               class="text-danger">
-                            Amount Error
+                           Amount Error
                         </span>
                         <span class="input-group-addon"></span>
                     </div>
@@ -83,7 +83,7 @@
                     <div class="form-group col-md-8">
                         <select class="form-control" th:field="*{type}">
                             <option value="0">Select Type of Inbound</option>
-                            <option th:each="inbound : ${inbounds}" th:value="${inbound.id}"
+                            <option th:each="inbound : ${inbounds}" th:value="${inbound.type}"
                                     th:text="${inbound.type}"></option>
                         </select>
                         <div class="input-group-append">
@@ -121,12 +121,10 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label>
-                            <input type="regNumber" th:field="*{truck}"
-                                   class="form-control input-lg"
-                                   placeholder="regNumber"
-                                   required="true">
-                        </label>
+                        <input type="regNumber" th:field="*{truck}"
+                               class="form-control input-lg"
+                               placeholder="regNumber"
+                               required="true">
                         <span th:if="${#fields.hasErrors('truck.regNumber')}"
                               th:errors="*{regNumber}"
                               class="text-danger">
@@ -144,8 +142,8 @@
                             Check me out
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary" value="Save">PROCEED</button>
                 </div>
+                <button type="submit" class="btn btn-primary" th:value="Save" >PROCEED</button >
             </form>
         </div>
     </div>

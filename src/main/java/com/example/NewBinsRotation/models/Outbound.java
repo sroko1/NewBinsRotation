@@ -22,8 +22,8 @@ public class Outbound implements Serializable {
     private int id;
     @Column(name = "TYPE")
     private String type;
-    @Column(name = "QUANTITY")
-    private int quantity;
+    @Column(name = "AMOUNT")
+    private int amount;
     @Column(name = "CHECKED_AT")
     private LocalDateTime checkedAt;
     @Column(name = "LOCATION")

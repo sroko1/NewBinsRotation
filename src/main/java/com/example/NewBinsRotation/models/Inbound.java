@@ -25,30 +25,26 @@ public class Inbound implements Serializable {
     private int id;
     @Column(name = "TYPE")
     private String type;
-    @Column(name = "QUANTITY")
-    private int quantity;
+    @Column(name = "AMOUNT")
+    private int amount;
     @Column(name = "CHECKED_AT")
-    @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
-    private Date checkedAt;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private String checkedAt;
     @Column(name = "LOCATION")
     private String location;
     @Column(name = "VOLUME_AMOUNT")
     private double volumeAmount;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
-            name= "bin_feat_inbounds",
+            name = "bin_feat_inbounds",
             joinColumns = @JoinColumn(name = "bin_features_ID"),
-            inverseJoinColumns =  @JoinColumn(name = "inbounds_ID")
+            inverseJoinColumns = @JoinColumn(name = "inbounds_ID")
     )
     private List<BinFeature> binsFeatures;
 
-   @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "T_ID", nullable = false)
     private Truck truck;
 
 }
-//mysql w trucku  ->INBOUND_ID smallint not null,
-//OUTBOUND_ID  smallint not null,
-//foreign key (INBOUND_ID) references inbounds(ID),
-//foreign key (OUTBOUND_ID) references outbounds(ID)

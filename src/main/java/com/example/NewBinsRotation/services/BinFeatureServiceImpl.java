@@ -50,5 +50,9 @@ public class BinFeatureServiceImpl implements BinFeatureService {
     public void editBinFeature(BinFeature binFeature) {
         binFeatureRepository.save(binFeature);
     }
+    @Override
+    public  void save(BinFeature binFeature){
+        binFeatureRepository.save(binFeature);
+    }
 }
 

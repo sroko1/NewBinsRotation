@@ -27,7 +27,7 @@
         <tr>
             <th><span th:text="#{label.outbound.type}"></span></th>
             <th><span th:text="#{label.outbound.checkedAt}"></span></th>
-            <th><span th:text="#{label.outbound.quantity}"></span></th>
+            <th><span th:text="#{label.outbound.amount}"></span></th>
             <th><span th:text="#{label.outbound.location}"></span></th>
         </tr>
         </thead>
@@ -35,7 +35,7 @@
         <tr th:unless="${outbound == null}" th:each="outbound : ${outbounds}">
             <td><span th:text="${outbound.type}"></span></td>
             <td><span th:text="${outbound.checkedAt}"></span></td>
-            <td><span th:text="${outbound.quantity}"></span></td>
+            <td><span th:text="${outbound.amount}"></span></td>
             <td><span th:text="${outbound.location}"></span></td>
             <td>
                 <form th:action="@{edit}" method="post">

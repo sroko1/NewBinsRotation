@@ -22,4 +22,5 @@ public interface BinFeatureService {
     Optional<BinFeature> getBinFeatureById(Integer id);
 
     void editBinFeature(BinFeature binFeature);
+    void save(BinFeature binFeature);
 }

@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface InboundRepository extends JpaRepository<Inbound, Integer> {
-   void deleteById(Integer id);
-   Optional<Inbound> findById(Integer id);
+    void deleteById(Integer id);
+
+    Optional<Inbound> findById(Integer id);
+
+    void save(Integer id);
 }
