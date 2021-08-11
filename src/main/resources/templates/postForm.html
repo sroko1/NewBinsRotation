@@ -42,15 +42,16 @@
 <div class="container">
     <div class="row" style="margin-top:20px">
         <div class="col-xs12 col-sm8 col-md6 col-sm-offset-2 col-md-offset3">
-            <form th:action="@{saveForm}" th:object="${inbound}" method="post">
-                <fieldset>
+            <form th:action="@{saveForm}" th:object="${form}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <select class="form-control" th:field="*{location}">
-                            <option value="0">Select Inbound Location</option>
-                            <option th:each="inbound : ${inbounds}" th:value="${inbound.location}"
-                                    th:text="${inbound.location}"></option>
-                        </select>
+                        <label>
+                            <select class="form-control" th:field="*{inbounds}">
+                                <option value="0">Select Inbound Location</option>
+                                <option th:each="inbound : ${inbounds}" th:value="${inbound.id}"
+                                        th:text="${inbound.location}"></option>
+                            </select>
+                        </label>
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                         </div>
@@ -58,35 +59,41 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <select class="form-control" th:field="*{binsFeatures}">
-                            <option value="0">Select BIN type</option>
-                            <option th:each="binFeature : ${binsFeatures}" th:value="${binFeature.id}"
-                                    th:text="${binFeature.name}"></option>
-                        </select>
+                        <label>
+                            <select class="form-control" th:field="*{binFeatures}">
+                                <option value="0">Select BIN type</option>
+                                <option th:each="binFeature : ${binsFeatures}" th:value="${binFeature.id}"
+                                        th:text="${binFeature.name}"></option>
+                            </select>
+                        </label>
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-dumpster"></i></span>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <input type="amount" th:field="*{binsFeatures}"
-                               class="form-control input-lg"
-                               placeholder="amount"
-                               required="true">
-                        <span th:if="${#fields.hasErrors('binsFeatures')}"
+                        <label>
+                            <input type="text" th:field="*{amount}"
+                                   class="form-control input-lg"
+                                   placeholder="Amount"
+                                   required="true">
+                        </label>
+                        <span th:if="${#fields.hasErrors('amount')}"
                               th:errors="*{amount}"
                               class="text-danger">
-                           Amount Error
+                            Amount Error
                         </span>
                         <span class="input-group-addon"></span>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <select class="form-control" th:field="*{type}">
-                            <option value="0">Select Type of Inbound</option>
-                            <option th:each="inbound : ${inbounds}" th:value="${inbound.type}"
-                                    th:text="${inbound.type}"></option>
-                        </select>
+                        <label>
+                            <select class="form-control" th:field="*{inbounds}">
+                                <option value="0">Select Type of Inbound</option>
+                                <option th:each="inbound : ${inbounds}" th:value="${inbound.id}"
+                                        th:text="${inbound.type}"></option>
+                            </select>
+                        </label>
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-truck-loading"></i></span>
                         </div>
@@ -94,11 +101,13 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <select class="form-control" th:field="*{truck}">
-                            <option value="0">Select Type of Trailer</option>
-                            <option th:each="truck : ${trucks}" th:value="${truck.id}"
-                                    th:text="${truck.trailerType}"></option>
-                        </select>
+                        <label>
+                            <select class="form-control" th:field="*{trucks}">
+                                <option value="0">Select Type of Trailer</option>
+                                <option th:each="truck : ${trucks}" th:value="${truck.id}"
+                                        th:text="${truck.trailerType}"></option>
+                            </select>
+                        </label>
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-truck-moving"></i></span>
                         </div>
@@ -106,11 +115,13 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <input type="date" th:field="*{checkedAt}"
-                               class="form-control input-lg"
-                               placeholder="checkedAt"
-                               required="true">
-                        <span th:if="${#fields.hasErrors('checkedAt')}"
+                        <label>
+                            <input type="date" th:field="*{inbounds}"
+                                   class="form-control input-lg"
+                                   placeholder="checkedAt"
+                                   required="true">
+                        </label>
+                        <span th:if="${#fields.hasErrors('inbounds')}"
                               th:errors="*{checkedAt}"
                               class="text-danger">
                             Date Error
@@ -122,11 +133,13 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <input type="regNumber" th:field="*{truck}"
-                               class="form-control input-lg"
-                               placeholder="regNumber"
-                               required="true">
-                        <span th:if="${#fields.hasErrors('truck.regNumber')}"
+                        <label>
+                            <input type="text" th:field="*{trucks}"
+                                   class="form-control input-lg"
+                                   placeholder="regNumber"
+                                   required="true">
+                        </label>
+                        <span th:if="${#fields.hasErrors('trucks')}"
                               th:errors="*{regNumber}"
                               class="text-danger">
                                   Registration No. Error
@@ -143,9 +156,8 @@
                             Check me out
                         </label>
                     </div>
+                    <button type="submit" class="btn btn-primary" value="Form">PROCEED</button>
                 </div>
-                <button type="submit" class="btn btn-primary" th:value="Inbound" >PROCEED</button >
-                </fieldset>
             </form>
         </div>
     </div>

@@ -8,10 +8,10 @@ import java.util.Optional;
 
 
 public interface TruckRepository extends JpaRepository<Truck, Integer> {
-    void deleteById(Integer id);
+    void deleteById(int id);
 
-    Optional<Truck> findById(Integer id);
+   Truck findById(int id);
 
-    void save(Integer id);
+    void save(int id);
 }
 

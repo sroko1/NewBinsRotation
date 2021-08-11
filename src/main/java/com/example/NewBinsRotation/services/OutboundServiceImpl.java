@@ -32,13 +32,13 @@ public class OutboundServiceImpl implements OutboundService{
     }
 
     @Override
-    public void deleteOutbound(Integer id) {
+    public void deleteOutbound(int id) {
        outboundRepository.deleteById(id);
 
     }
 
     @Override
-    public Optional<Outbound> getOutboundById(Integer id) {
+    public Outbound getOutboundById(int id) {
         return outboundRepository.findById(id);
     }
 

@@ -28,13 +28,13 @@ public class TruckServiceImpl implements TruckService{
     }
 
     @Override
-    public void deleteTruck(Integer id) {
+    public void deleteTruck(int id) {
         truckRepository.deleteById(id);
 
     }
 
     @Override
-    public Optional<Truck> getTruckById(Integer id) {
+    public Truck getTruckById(int id) {
         return truckRepository.findById(id);
     }
 

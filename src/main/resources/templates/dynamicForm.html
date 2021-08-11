@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+  <title>INB ORDERS</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link href="https://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+        th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+        rel="stylesheet" media="screen"/>
+  <script src="https://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+          th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+  <link href="../static/css/spring-core.css"
+        th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th><span th:text="#{label.form.id}"></span></th>
+      <th><span th:text="#{label.form.binFeature.binName}"></span></th>
+      <th><span th:text="#{label.form.amount}"></span></th>
+      <th><span th:text="#{label.form.type}"></span></th>
+      <th><span th:text="#{label.form.trailerType}"></span></th>
+      <th><span th:text="#{label.form.checkedAt}"></span></th>
+      <th><span th:text="#{label.form.truckRegNumber}"></span></th>
+      <th><span th:text="#{label.form.supplierName}"></span></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:unless="${form == null}" th:each="form: ${formPage.content}">
+      <td><span th:text="${form.id}"></span></td>
+      <td><span th:text="${form.binFeature.binFeaturesName}"></span></td>
+      <td><span th:text="${form.amount}"></span></td>
+      <td><span th:text="${form.inbound.inboundType}"></span></td>
+      <td><span th:text="${form.truck.truckTrailerType}"></span></td>
+      <td><span th:text="${form.inbound.inboundCheckedAt}"></span></td>
+      <td><span th:text="${form.truck.truckRegNumber}"></span></td>
+      </td>
+      <td>
+        <form th:action="@{update}" method="post">
+          <button th:type="submit" class="btn btn-success" th:name="id" th:value="${form.id}">Edit</button>
+        </form>
+      </td>
+      <td>
+        <form th:action="@{erase}" method="post">
+          <button th:type="submit" class="btn btn-warning" th:name="id" th:value="${form.id}">Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div th:if="${formPage.totalPages > 0}" class="pagination"
+       th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/form/paginated(page=${pageNumber})}"
+       th:text="${pageNumber}"></a>
+  </div>
+</div>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

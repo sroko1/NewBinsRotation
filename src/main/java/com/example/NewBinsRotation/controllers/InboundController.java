@@ -2,6 +2,7 @@ package com.example.NewBinsRotation.controllers;
 
 
 import com.example.NewBinsRotation.models.BinFeature;
+import com.example.NewBinsRotation.models.Form;
 import com.example.NewBinsRotation.models.Inbound;
 import com.example.NewBinsRotation.models.Truck;
 import com.example.NewBinsRotation.services.BinFeatureService;
@@ -11,8 +12,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +25,7 @@ import java.util.Optional;
 public class InboundController {
 
 
-   private final TruckService truckService;
+    private final TruckService truckService;
 
     private final BinFeatureService binFeatureService;
 
@@ -41,61 +44,52 @@ public class InboundController {
     }
 
     @RequestMapping("/list/{id}")
-    public String getPointedInbound(@PathVariable Integer id, Model model){
+    public String getPointedInbound(@PathVariable int id, Model model) {
         model.addAttribute("inbounds", inboundService.getInboundById(id));
-        return"dynamicInboundList";
+        return "dynamicInboundList";
     }
 
     @PostMapping("/delete")
-    public String deleteInbound(@RequestParam Integer id, Model model){
+    public String deleteInbound(@RequestParam int id, Model model) {
         inboundService.deleteInbound(id);
         model.addAttribute("inbounds", inboundService.getAllInbound());
         return "dynamicInboundList";
     }
 
     @PostMapping("/edit")
-    public String editInbound(@RequestParam Integer id, Model model){
-       model.addAttribute("inbound", inboundService.getInboundById(id));
-       model.addAttribute("truck", truckService.getTruckById(id));
-       model.addAttribute("binsFeatures",binFeatureService.getBinFeatureById(id));
-       return "postInbound";
+    public String editInbound(@RequestParam int id, Model model) {
+        model.addAttribute("inbound", inboundService.getInboundById(id));
+        model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
+        model.addAttribute("truck", truckService.getAllTruck());
+        return "postInbound";
     }
 
+
     @PostMapping("/save")
-    public String saveInbound(Inbound inbound){
+    public String saveInbound(Inbound inbound) {
         inboundService.editInbound(inbound);
         return "redirect:list";
     }
 
     @GetMapping("/addNew")
-    public  String addNewInbound(Model model){
-        model.addAttribute("inbound",new Inbound());
+    public String addNewInbound(Model model) {
+        model.addAttribute("inbound", new Inbound());
         return "postInbound";
     }
 
-    @RequestMapping("/form")
-    public String addNewData(Model model){
+    @GetMapping("/form")
+    public String addNewData(Model model) {
         model.addAttribute("inbound", new Inbound());
-
         model.addAttribute("inbounds", inboundService.getAllInbound());
-        model.addAttribute("trucks", truckService.getAllTruck());
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
-        return "postForm";
+        model.addAttribute("trucks", truckService.getAllTruck());
+        return "draw";
     }
-
-    @PostMapping("/saveForm")
-    public String saveData( Inbound inbound, BinFeature binFeature, Truck truck ){
-       inboundService.editInbound(inbound);
-        binFeatureService.editBinFeature(binFeature);
-        truckService.editTruck(truck);
-        return "redirect:list";
-    }
-
 
 
     @RequestMapping("/paginated")
     public String getInboundPaginated(Model model,
-                                         @RequestParam("page") Optional<Integer> page) {
+                                      @RequestParam("page") Optional<Integer> page) {
         int currentPage = page.orElse(1);
         Page<Inbound> inboundPage = inboundService
                 .getAllInboundPaginated(
@@ -116,7 +110,7 @@ public class InboundController {
         return "indexInbound";
     }
 
-    @RequestMapping ("/paginatedList")
+    @RequestMapping("/paginatedList")
     public String getInboundListPaginated(Model model,
                                           @RequestParam("page") Optional<Integer> page) {
         int currentPage = page.orElse(1);
@@ -140,4 +134,7 @@ public class InboundController {
     }
 
 
+
+
 }
+

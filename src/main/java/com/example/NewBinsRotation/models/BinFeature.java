@@ -4,13 +4,13 @@ package com.example.NewBinsRotation.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Data
@@ -48,7 +48,7 @@ public class BinFeature implements Serializable {
                     @JoinColumn(name = "bin_features_ID", referencedColumnName = "ID",
                             nullable = false)},
             inverseJoinColumns = {
-                    @JoinColumn(name = "inbounds_ID", referencedColumnName = "ID",
+                    @JoinColumn(name = "inbounds_I_ID", referencedColumnName = "I_ID",
                             nullable = false)})
     private List<Inbound> inbounds;
 
@@ -60,9 +60,15 @@ public class BinFeature implements Serializable {
                     @JoinColumn(name = "bin_features_ID", referencedColumnName = "ID",
                             nullable = false, updatable = false)},
             inverseJoinColumns = {
-                    @JoinColumn(name = "outbounds_ID", referencedColumnName = "ID",
+                    @JoinColumn(name = "outbounds_O_ID", referencedColumnName = "O_ID",
                             nullable = false, updatable = false)})
     private List<Outbound> outbounds;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "form_bin_features",
+            joinColumns = @JoinColumn(name = "form_ID"),
+            inverseJoinColumns = @JoinColumn(name = "bin_features_ID"))
+    private List<BinFeature> binFeatures;
 
 
     }

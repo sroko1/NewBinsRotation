@@ -18,12 +18,10 @@ import java.util.List;
 public class Outbound implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "ID")
+    @Column(name = "O_ID")
     private int id;
     @Column(name = "TYPE")
     private String type;
-    @Column(name = "AMOUNT")
-    private int amount;
     @Column(name = "CHECKED_AT")
     private LocalDateTime checkedAt;
     @Column(name = "LOCATION")
@@ -36,11 +34,11 @@ public class Outbound implements Serializable {
     @JoinTable(
             name= "bin_feat_outbounds",
             joinColumns = @JoinColumn(name = "bin_features_ID"),
-            inverseJoinColumns =  @JoinColumn(name = "outbounds_ID")
+            inverseJoinColumns =  @JoinColumn(name = "outbounds_O_ID")
     )
     private List<BinFeature> binsFeatures;
 
     @ManyToOne
-    @JoinColumn(name = "T_ID",nullable = false)
+    @JoinColumn(name = "O_ID",insertable = false, updatable = false)
     private Truck truck;
 }

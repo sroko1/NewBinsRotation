@@ -13,7 +13,6 @@
         <tr>
             <th><span th:text="#{label.inbound.id}"></span></th>
             <th><span th:text="#{label.inbound.type}"></span></th>
-            <th><span th:text="#{label.inbound.amount}"></span></th>
             <th><span th:text="#{label.inbound.checkedAt}"></span></th>
             <th><span th:text="#{label.inbound.location}"></span></th>
             <th><span th:text="#{label.inbound.volumeAmount}"></span></th>
@@ -23,7 +22,6 @@
         <tr th:each="inbound : ${inboundPage.content}">
             <td><span th:text="${inbound.id}"></span></td>
             <td><span th:text="${inbound.type}"></span></td>
-            <td><span th:text="${inbound.amount}"></span></td>
             <td><span th:text="${inbound.checkedAt}"></span></td>
             <td><span th:text="${inbound.location}"></span></td>
             <td><span th:text="${inbound.volumeAmount}"></span></td>

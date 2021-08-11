@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface BinFeatureRepository extends JpaRepository<BinFeature, Integer> {
 
-    void deleteById(Integer id);
+    void deleteById(int id);
 
-    Optional<BinFeature> findById(Integer id);
+    BinFeature findById(int id);
 
-    void save(Integer id);
+    void save(int id);
 }

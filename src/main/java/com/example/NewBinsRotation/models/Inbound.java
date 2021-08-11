@@ -8,7 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 
@@ -21,12 +20,10 @@ import java.util.List;
 public class Inbound implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "ID")
+    @Column(name = "I_ID")
     private int id;
     @Column(name = "TYPE")
     private String type;
-    @Column(name = "AMOUNT")
-    private int amount;
     @Column(name = "CHECKED_AT")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String checkedAt;
@@ -39,12 +36,14 @@ public class Inbound implements Serializable {
     @JoinTable(
             name = "bin_feat_inbounds",
             joinColumns = @JoinColumn(name = "bin_features_ID"),
-            inverseJoinColumns = @JoinColumn(name = "inbounds_ID")
+            inverseJoinColumns = @JoinColumn(name = "inbounds_I_ID")
     )
     private List<BinFeature> binsFeatures;
 
+
     @ManyToOne
-    @JoinColumn(name = "T_ID", nullable = false)
+    @JoinColumn(name = "I_ID",insertable = false, updatable = false)
     private Truck truck;
+
 
 }

@@ -11,9 +11,9 @@ public interface TruckService {
 
     void addNewTruck(Truck truck);
 
-    void deleteTruck(Integer id);
+    void deleteTruck(int id);
 
-    Optional<Truck> getTruckById(Integer id);
+    Truck getTruckById(int id);
 
     void editTruck(Truck truck);
 }

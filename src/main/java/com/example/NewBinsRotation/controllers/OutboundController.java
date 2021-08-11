@@ -30,20 +30,20 @@ public class OutboundController {
         return "dynamicOutboundList";
     }
     @RequestMapping("/list/{id}")
-    public String getPointedOutbound(@PathVariable Integer id, Model model){
+    public String getPointedOutbound(@PathVariable int id, Model model){
         model.addAttribute("outbounds", outboundService.getOutboundById(id));
         return"dynamicOutboundList";
     }
 
     @PostMapping("/delete")
-    public String deleteOutbound(@RequestParam Integer id, Model model){
+    public String deleteOutbound(@RequestParam int id, Model model){
         outboundService.deleteOutbound(id);
         model.addAttribute("outbounds", outboundService.getAllOutbound());
         return "dynamicOutboundList";
     }
 
     @PostMapping("/edit")
-    public String editOutbound(@RequestParam Integer id, Model model){
+    public String editOutbound(@RequestParam int id, Model model){
         model.addAttribute("outbound", outboundService.getOutboundById(id));
         return "postOutbound";
     }

@@ -13,9 +13,9 @@ public interface OutboundService {
     List<Outbound>getAllOutbound();
     Page<Outbound>getAllOutboundPaginated(Pageable pageable);
 
-    void deleteOutbound(Integer id);
+    void deleteOutbound(int id);
 
-    Optional<Outbound> getOutboundById(Integer id);
+   Outbound getOutboundById(int id);
 
 
     void editOutbound(Outbound outbound);

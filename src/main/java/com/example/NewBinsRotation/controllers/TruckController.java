@@ -30,22 +30,23 @@ public class TruckController {
         return "dynamicTruckList";
     }
     @PostMapping("/delete")
-    public String deleteTruck(@RequestParam Integer id, Model model) {
+    public String deleteTruck(@RequestParam int id, Model model) {
       truckService.deleteTruck(id);
         model.addAttribute("trucks", truckService.getAllTruck());
         return "dynamicTruckList";
     }
 
     @PostMapping("/edit")
-    public String editBinFeature(@RequestParam Integer id, Model model) {
+    public String editTruck(@RequestParam int id, Model model) {
         model.addAttribute("truck", truckService.getTruckById(id));
         model.addAttribute("inbounds", inboundService.getAllInbound());
         model.addAttribute("outbounds",outboundService.getAllOutbound());
+        model.addAttribute("trucks", truckService.getAllTruck());
         return "postTruck";
     }
 
     @PostMapping("/save")
-    public String saveTruck(Truck truck, @RequestParam Integer id) {
+    public String saveTruck(Truck truck, @RequestParam int id) {
      truckService.getTruckById(id);
         truckService.editTruck(truck);
         return "redirect:list";
@@ -58,3 +59,6 @@ public class TruckController {
     }
 
 }
+
+
+

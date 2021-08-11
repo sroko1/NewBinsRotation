@@ -40,14 +40,14 @@ public class BinFeatureController {
     }
 
     @PostMapping("/delete")
-    public String deleteBinFeature(@RequestParam Integer id, Model model) {
+    public String deleteBinFeature(@RequestParam int id, Model model) {
     binFeatureService.deleteBinFeature(id);
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
         return "dynamicBinFeatList";
     }
 
     @PostMapping("/edit")
-    public String editBinFeature(@RequestParam Integer id, Model model) {
+    public String editBinFeature(@RequestParam int id, Model model) {
         model.addAttribute("binFeature", binFeatureService.getBinFeatureById(id));
         model.addAttribute("inbounds", inboundService.getAllInbound());
         model.addAttribute("trucks", truckService.getAllTruck());
@@ -55,7 +55,7 @@ public class BinFeatureController {
     }
 
     @PostMapping("/save")
-    public String saveBinFeature(BinFeature binFeature, @RequestParam Integer id) {
+    public String saveBinFeature(BinFeature binFeature, @RequestParam int id) {
         binFeatureService.getBinFeatureById(id);
         binFeatureService.editBinFeature(binFeature);
         return "redirect:list";

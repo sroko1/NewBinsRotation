@@ -17,7 +17,7 @@ public interface BinFeatureService {
 
     void addNewBinFeature(BinFeature binFeature);
 
-    void deleteBinFeature(Integer id);
+    void deleteBinFeature(int id);
 
     Optional<BinFeature> getBinFeatureById(Integer id);
 

@@ -51,33 +51,16 @@ public class InboundServiceImpl implements InboundService {
     @Override
     public Optional<Inbound> getInboundById(Integer id) {
         return inboundRepository.findById(id);
-
     }
 
     @Override
     public void editInbound(Inbound inbound) {
         inboundRepository.save(inbound);
-
     }
-
-  /*  @Override
-    public void addNewInbound(Integer id) {
-
-        Inbound inbound = inboundRepository.getById(id);
-        BinFeature binFeature = binFeatureRepository.getById(getInboundById(id));
-
-        binFeature.setAmount(binFeature.getAmount() + getInboundById(binFeature.getAmount()));
-
-        binFeatureRepository.save(binFeature);
-        inboundRepository.save(inbound);
-        binFeatureRepository.findAll();
-    }
-*/
 
     @Override
     public void addNewInbound(Inbound inbound) {
         inboundRepository.save(inbound);
-
     }
 
     @Override
@@ -85,31 +68,4 @@ public class InboundServiceImpl implements InboundService {
         inboundRepository.save(inbound);
     }
 
-    @Override
-    public void saveData(Inbound inbound, BinFeature binFeature, Truck truck) {
-
-        inboundRepository.save(inbound);
-        binFeatureRepository.save(binFeature);
-        truckRepository.save(truck);
-    }
-
-
-    @Override
-    public List<Inbound> addNewData(Integer id) {
-        Optional<Inbound> inbound = inboundRepository.findById(id);
-       // if (inbound.isPresent()) {
-           // Inbound inb = inbound.get();
-        Inbound inb = new Inbound();
-        inboundRepository.save(inb);
-
-            BinFeature binFeature = binFeatureRepository.getById(inb.getId());
-            binFeature.setName(binFeature.getName());
-            binFeature.setAmount(binFeature.getAmount() + inb.getAmount());
-            binFeatureRepository.save(binFeature);
-            Truck truck = truckRepository.findAll().get(id);
-            truck.setRegNumber(truck.getRegNumber());
-            truckRepository.save(truck);
-
-        return inboundRepository.findAll();
-    }
 }
