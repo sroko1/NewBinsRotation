@@ -98,6 +98,18 @@
                             <span class="input-group-text"><i class="fas fa-truck-loading"></i></span>
                         </div>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label>
+                            <select class="form-control" th:field="*{suppliers}">
+                                <option value="0">Select Supplier</option>
+                                <option th:each="supplier : ${suppliers}" th:value="${supplier.id}"
+                                        th:text="${supplier.name}"></option>
+                            </select>
+                        </label>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-parachute-box"></i></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-8">

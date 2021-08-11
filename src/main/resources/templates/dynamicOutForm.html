@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>INB ORDERS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+    <script src="https://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+    <link href="../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><span th:text="#{label.outForm.id}"></span></th>
+            <th><span th:text="#{label.outForm.binFeature.binName}"></span></th>
+            <th><span th:text="#{label.outForm.amount}"></span></th>
+            <th><span th:text="#{label.outForm.type}"></span></th>
+            <th><span th:text="#{label.outForm.trailerType}"></span></th>
+            <th><span th:text="#{label.outForm.checkedAt}"></span></th>
+            <th><span th:text="#{label.outForm.truckRegNumber}"></span></th>
+            <th><span th:text="#{label.outForm.supplierName}"></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:unless="${outForm == null}" th:each="outForm: ${outFormPage.content}">
+            <td><span th:text="${outForm.id}"></span></td>
+            <td><span th:text="${outForm.binFeatures.name}"></span></td>
+            <td><span th:text="${outForm.amount}"></span></td>
+            <td><span th:text="${outForm.outbounds.type}"></span></td>
+            <td><span th:text="${outForm.trucks.trailerType}"></span></td>
+            <td><span th:text="${outForm.outbounds.checkedAt}"></span></td>
+            <td><span th:text="${outForm.trucks.regNumber}"></span></td>
+            <td><span th:text="${outForm.suppliers.name}"></span></td>
+            </td>
+            <td>
+                <form th:action="@{update}" method="post">
+                    <button th:type="submit" class="btn btn-success" th:name="id" th:value="${outForm.id}">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{delete}" method="post">
+                    <button th:type="submit" class="btn btn-warning" th:name="id" th:value="${outForm.id}">Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${outFormPage.totalPages > 0}" class="pagination"
+         th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/outForm/paginated(page=${pageNumber})}"
+           th:text="${pageNumber}"></a>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

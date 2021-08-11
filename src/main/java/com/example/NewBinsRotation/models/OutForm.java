@@ -14,8 +14,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "form")
-public class Form implements Serializable {
+@Table(name = "out_form")
+public class OutForm implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Form implements Serializable {
     @ManyToOne
     private Truck trucks;
     @ManyToOne
-    private Inbound inbounds;
+    private Outbound outbounds;
     @ManyToOne
     private Supplier suppliers;
 }

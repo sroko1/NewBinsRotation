@@ -2,7 +2,6 @@ package com.example.NewBinsRotation.controllers;
 
 
 import com.example.NewBinsRotation.models.Form;
-import com.example.NewBinsRotation.models.Inbound;
 import com.example.NewBinsRotation.services.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,17 +21,17 @@ public class FormController {
 
     private final FormService formService;
     private final InboundService inboundService;
-    private final OutboundService outboundService;
     private final BinFeatureService binFeatureService;
     private final TruckService truckService;
+    private final SupplierService supplierService;
 
-    public FormController(FormService formService, InboundService inboundService, OutboundService outboundService,
-                          BinFeatureService binFeatureService, TruckService truckService) {
+    public FormController(FormService formService, InboundService inboundService,
+                          BinFeatureService binFeatureService, TruckService truckService, SupplierService supplierService) {
         this.formService = formService;
         this.inboundService = inboundService;
-        this.outboundService = outboundService;
         this.binFeatureService = binFeatureService;
         this.truckService = truckService;
+        this.supplierService = supplierService;
     }
 
     @RequestMapping("/list")
@@ -79,17 +78,19 @@ public class FormController {
     @PostMapping("/update")
     public String editForm(@RequestParam int id, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "new";
+            return "newInForm";
         } else {
             model.addAttribute("form", formService.getFormById(id));
 
             model.addAttribute("inbounds", inboundService.getAllInbound());
 
-            model.addAttribute("outbounds", outboundService.getAllOutbound());
+           // model.addAttribute("outbounds", outboundService.getAllOutbound());
 
             model.addAttribute("trucks", truckService.getAllTruck());
 
             model.addAttribute("binFeatures", binFeatureService.getAllBinFeature());
+
+            model.addAttribute("suppliers", supplierService.getAllSuppliers());
         }
         return "postForm";
     }
@@ -98,9 +99,11 @@ public class FormController {
     public String addNewForm(Model model ) {
         model.addAttribute("form", new Form());
         model.addAttribute("inbounds", inboundService.getAllInbound());
-        model.addAttribute("outbounds", outboundService.getAllOutbound());
+      //  model.addAttribute("outbounds", outboundService.getAllOutbound());
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
         model.addAttribute("trucks", truckService.getAllTruck());
+        model.addAttribute("suppliers", supplierService.getAllSuppliers());
+
         return "postForm";
     }
 

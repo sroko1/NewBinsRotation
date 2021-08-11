@@ -20,20 +20,17 @@ public class FormServiceImpl implements FormService {
     final BinFeatureRepository binFeatureRepository;
     final TruckRepository truckRepository;
     final InboundRepository inboundRepository;
-    final OutboundRepository outboundRepository;
     final SupplierRepository supplierRepository;
 
     public FormServiceImpl(FormRepository formRepository,
                            BinFeatureRepository binFeatureRepository,
                            TruckRepository truckRepository, InboundRepository inboundRepository,
-                           OutboundRepository outboundRepository,
                            SupplierRepository supplierRepository) {
 
         this.formRepository = formRepository;
         this.binFeatureRepository = binFeatureRepository;
         this.truckRepository = truckRepository;
         this.inboundRepository = inboundRepository;
-        this.outboundRepository = outboundRepository;
         this.supplierRepository = supplierRepository;
     }
 
@@ -84,12 +81,9 @@ public class FormServiceImpl implements FormService {
 
             BinFeature binFeature = binFeatureRepository.getById(fr.getBinFeatures().getId());
             Inbound inbound = inboundRepository.getById(fr.getInbounds().getId());
-            if (fr.getInbounds().equals(inbound)) {
                 binFeature.setAmount(binFeature.getAmount() + fr.getAmount());
-            } else {
-                binFeature.setAmount(binFeature.getAmount() - fr.getAmount());
-            }
                 binFeatureRepository.save(binFeature);
+
                 //Truck truck = truckRepository.findAll().get(id);
                 //truck.setRegNumber(truck.getRegNumber());
                 //truckRepository.save(truck);
