@@ -76,7 +76,7 @@ public class FormController {
     }
 
     @PostMapping("/update")
-    public String editForm(@RequestParam int id, BindingResult result, Model model) {
+    public String editForm(@RequestParam int id, Form form, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "newInForm";
         } else {
@@ -104,7 +104,7 @@ public class FormController {
         model.addAttribute("trucks", truckService.getAllTruck());
         model.addAttribute("suppliers", supplierService.getAllSuppliers());
 
-        return "postForm";
+        return "draw";
     }
 
     @PostMapping("/build")
@@ -113,7 +113,7 @@ public class FormController {
             return "draw";
         } else {
             formService.saveForm(form);
-            return "redirect:draw";
+            return "redirect:paginated";
         }
 
     }

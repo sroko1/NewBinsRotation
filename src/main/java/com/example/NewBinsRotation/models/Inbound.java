@@ -38,7 +38,7 @@ public class Inbound implements Serializable {
             joinColumns = @JoinColumn(name = "bin_features_ID"),
             inverseJoinColumns = @JoinColumn(name = "inbounds_I_ID")
     )
-    private List<BinFeature> binsFeatures;
+    private List<BinFeature> binFeatures;
 
 
     @ManyToOne

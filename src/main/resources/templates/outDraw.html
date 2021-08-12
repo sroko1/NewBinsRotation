@@ -42,7 +42,7 @@
 <div class="container">
     <div class="row" style="margin-top:20px">
         <div class="col-xs12 col-sm8 col-md6 col-sm-offset-2 col-md-offset3">
-            <form th:action="@{build}" th:object="${outForm}" method="post">
+            <form th:action="@{saveOutForm}" th:object="${outForm}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label>
@@ -133,7 +133,7 @@
                                    placeholder="checkedAt"
                                    required="true">
                         </label>
-                        <span th:if="${#fields.hasErrors('inbounds')}"
+                        <span th:if="${#fields.hasErrors('outbounds')}"
                               th:errors="*{checkedAt}"
                               class="text-danger">
                             Date Error

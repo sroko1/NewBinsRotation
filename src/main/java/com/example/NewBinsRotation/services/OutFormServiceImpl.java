@@ -78,14 +78,8 @@ public class OutFormServiceImpl implements OutFormService {
             outFormRepository.save(ofr);
 
             BinFeature binFeature = binFeatureRepository.getById(ofr.getBinFeatures().getId());
-           Outbound outbound = outboundRepository.getById(ofr.getOutbounds().getId());
            binFeature.setAmount(binFeature.getAmount() - ofr.getAmount());
-
-           binFeature.setAmount(binFeature.getAmount() + ofr.getAmount());
             binFeatureRepository.save(binFeature);
-            //Truck truck = truckRepository.findAll().get(id);
-            //truck.setRegNumber(truck.getRegNumber());
-            //truckRepository.save(truck);
         }
         return outFormRepository.findAll();
     }
@@ -94,13 +88,12 @@ public class OutFormServiceImpl implements OutFormService {
     public void deleteOutForm ( int id){
         OutForm outForm = outFormRepository.findById(id);
         BinFeature binFeature = binFeatureRepository.getById(outForm.getBinFeatures().getId());
-        Outbound outbound = outboundRepository.getById(outForm.getOutbounds().getId());
-        if (outForm.getOutbounds().equals(outbound)) {
-            binFeature.setAmount(binFeature.getAmount() - outForm.getAmount());
-        } else {
+
             binFeature.setAmount(binFeature.getAmount() + outForm.getAmount());
+            binFeatureRepository.save(binFeature);
+            outFormRepository.deleteById(id);
         }
     }
 
-}
+
 

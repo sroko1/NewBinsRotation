@@ -58,18 +58,38 @@ public class BinFeature implements Serializable {
     @JoinTable(name = "bin_feat_outbounds",
             joinColumns = {
                     @JoinColumn(name = "bin_features_ID", referencedColumnName = "ID",
-                            nullable = false, updatable = false)},
+                            nullable = false )},
             inverseJoinColumns = {
                     @JoinColumn(name = "outbounds_O_ID", referencedColumnName = "O_ID",
-                            nullable = false, updatable = false)})
+                            nullable = false)})
     private List<Outbound> outbounds;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+
+
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH})
     @JoinTable(name = "form_bin_features",
-            joinColumns = @JoinColumn(name = "form_ID"),
-            inverseJoinColumns = @JoinColumn(name = "bin_features_ID"))
-    private List<BinFeature> binFeatures;
+            joinColumns ={
+            @JoinColumn(name = "form_ID", referencedColumnName =  "ID",
+            nullable = false)},
+            inverseJoinColumns = {
+            @JoinColumn(name = "bin_features_ID", referencedColumnName = "ID",
+            nullable = false)
+            })
+    private List<Form>forms;
 
 
-    }
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH})
+    @JoinTable(name = "outForm_bin_features",
+            joinColumns ={
+                    @JoinColumn(name = "outForm_ID", referencedColumnName =  "ID",
+                            nullable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "bin_features_ID", referencedColumnName = "ID",
+                            nullable = false)
+            })
+    private List<OutForm>outForms;
+
+
+}
 

@@ -76,7 +76,7 @@ public class OutFormController {
     }
 //////////////////////////////////
     @PostMapping("/update")
-    public String editOutForm(@RequestParam int id, BindingResult result, Model model) {
+    public String editOutForm(@RequestParam int id, OutForm outForm, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "newOutForm";
         } else {
@@ -103,7 +103,7 @@ public class OutFormController {
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
         model.addAttribute("trucks", truckService.getAllTruck());
         model.addAttribute("suppliers", supplierService.getAllSuppliers());
-        return "postOutForm";
+        return "outDraw";
     }
 
     @PostMapping("/build")
@@ -112,7 +112,7 @@ public class OutFormController {
             return "outDraw";
         } else {
             outFormService.saveOutForm(outForm);
-            return "redirect:outDraw";
+            return "redirect:paginated";
         }
 
     }

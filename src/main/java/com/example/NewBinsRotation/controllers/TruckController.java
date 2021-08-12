@@ -1,11 +1,10 @@
 package com.example.NewBinsRotation.controllers;
 
-import com.example.NewBinsRotation.models.BinFeature;
 import com.example.NewBinsRotation.models.Truck;
 import com.example.NewBinsRotation.services.InboundService;
 import com.example.NewBinsRotation.services.OutboundService;
+import com.example.NewBinsRotation.services.SupplierService;
 import com.example.NewBinsRotation.services.TruckService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +16,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/trucks")
 public class TruckController {
 
-    @Autowired
-    TruckService truckService;
-    @Autowired
-    InboundService inboundService;
-    @Autowired
-    OutboundService outboundService;
+
+     private final TruckService truckService;
+
+    private final InboundService inboundService;
+
+    private final OutboundService outboundService;
+
+
+    public TruckController(TruckService truckService, InboundService inboundService, OutboundService outboundService, SupplierService supplierService) {
+        this.truckService = truckService;
+        this.inboundService = inboundService;
+        this.outboundService = outboundService;
+
+    }
 
     @RequestMapping("/list")
     public String getTrucks(Model model){

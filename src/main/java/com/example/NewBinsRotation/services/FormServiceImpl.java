@@ -80,13 +80,9 @@ public class FormServiceImpl implements FormService {
             formRepository.save(fr);
 
             BinFeature binFeature = binFeatureRepository.getById(fr.getBinFeatures().getId());
-            Inbound inbound = inboundRepository.getById(fr.getInbounds().getId());
+
                 binFeature.setAmount(binFeature.getAmount() + fr.getAmount());
                 binFeatureRepository.save(binFeature);
-
-                //Truck truck = truckRepository.findAll().get(id);
-                //truck.setRegNumber(truck.getRegNumber());
-                //truckRepository.save(truck);
             }
             return formRepository.findAll();
         }
@@ -95,13 +91,12 @@ public class FormServiceImpl implements FormService {
         public void deleteForm ( int id){
             Form form = formRepository.findById(id);
             BinFeature binFeature = binFeatureRepository.getById(form.getBinFeatures().getId());
-            Inbound inbound = inboundRepository.getById(form.getInbounds().getId());
-            if (form.getInbounds().equals(inbound)) {
-                binFeature.setAmount(binFeature.getAmount() + form.getAmount());
-            } else {
+
                 binFeature.setAmount(binFeature.getAmount() - form.getAmount());
+                binFeatureRepository.save(binFeature);
+                formRepository.deleteById(id);
             }
         }
 
-    }
+
 
