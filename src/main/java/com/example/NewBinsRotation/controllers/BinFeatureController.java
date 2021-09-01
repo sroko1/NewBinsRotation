@@ -2,20 +2,17 @@ package com.example.NewBinsRotation.controllers;
 
 import com.example.NewBinsRotation.models.BinFeature;
 
-import com.example.NewBinsRotation.models.Inbound;
 import com.example.NewBinsRotation.services.BinFeatureService;
 import com.example.NewBinsRotation.services.InboundService;
+import com.example.NewBinsRotation.services.OutboundService;
 import com.example.NewBinsRotation.services.TruckService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,14 +21,23 @@ import java.util.Optional;
 
 public class BinFeatureController {
 
-    @Autowired
+    final
     BinFeatureService binFeatureService;
 
-    @Autowired
+    final
     InboundService inboundService;
 
-    @Autowired
+    final OutboundService outboundService;
+
+    final
     TruckService truckService;
+
+    public BinFeatureController(BinFeatureService binFeatureService, InboundService inboundService, OutboundService outboundService, TruckService truckService) {
+        this.binFeatureService = binFeatureService;
+        this.inboundService = inboundService;
+        this.outboundService = outboundService;
+        this.truckService = truckService;
+    }
 
     @RequestMapping("/list")
     public String getBins(Model model) {
@@ -50,7 +56,7 @@ public class BinFeatureController {
     public String editBinFeature(@RequestParam int id, Model model) {
         model.addAttribute("binFeature", binFeatureService.getBinFeatureById(id));
         model.addAttribute("inbounds", inboundService.getAllInbound());
-        model.addAttribute("trucks", truckService.getAllTruck());
+        model.addAttribute("outbounds", outboundService.getAllOutbound());
         return "postBinInb";
     }
 

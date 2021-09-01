@@ -18,7 +18,7 @@ public interface OutFormService {
 
     void saveOutForm(OutForm outForm);
 
-    void updateOutForm(OutForm outForm);
+    void editOutForm(OutForm outForm);
 
     OutForm findById(int id);
 

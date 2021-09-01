@@ -82,13 +82,11 @@ public class OutFormController {
         } else {
             model.addAttribute("outForm", outFormService.getOutFormById(id));
 
-           // model.addAttribute("inbounds", inboundService.getAllInbound());
+            model.addAttribute("binFeatures", binFeatureService.getAllBinFeature());
 
              model.addAttribute("outbounds", outboundService.getAllOutbound());
 
             model.addAttribute("trucks", truckService.getAllTruck());
-
-            model.addAttribute("binFeatures", binFeatureService.getAllBinFeature());
 
             model.addAttribute("suppliers", supplierService.getAllSuppliers());
         }
@@ -98,9 +96,8 @@ public class OutFormController {
     @GetMapping("/build")
     public String addNewOutForm(Model model ) {
         model.addAttribute("outForm", new OutForm());
-       // model.addAttribute("inbounds", inboundService.getAllInbound());
-          model.addAttribute("outbounds", outboundService.getAllOutbound());
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
+          model.addAttribute("outbounds", outboundService.getAllOutbound());
         model.addAttribute("trucks", truckService.getAllTruck());
         model.addAttribute("suppliers", supplierService.getAllSuppliers());
         return "outDraw";
@@ -118,9 +115,9 @@ public class OutFormController {
     }
 
     @PostMapping("/saveOutForm")
-    public String saveOutData( OutForm outForm) {
-        //outFormService.getFormById(id);
-        outFormService.updateOutForm(outForm);
+    public String saveOutForm( @RequestParam int id, OutForm outForm) {
+        outFormService.findById(id);
+        outFormService.editOutForm(outForm);
 
 
         return "redirect:paginated";

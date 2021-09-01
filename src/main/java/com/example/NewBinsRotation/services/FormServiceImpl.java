@@ -56,13 +56,13 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
-    public void updateForm(Form form) {
+    public void editForm(Form form) {
         formRepository.save(form);
 
     }
 
     @Override
-    public Form findById(int id) {
+    public Form findById(Integer id) {
         return formRepository.getById(id);
     }
 
@@ -80,9 +80,12 @@ public class FormServiceImpl implements FormService {
             formRepository.save(fr);
 
             BinFeature binFeature = binFeatureRepository.getById(fr.getBinFeatures().getId());
-
+            binFeature.setId(binFeature.getId());
                 binFeature.setAmount(binFeature.getAmount() + fr.getAmount());
                 binFeatureRepository.save(binFeature);
+                Truck truck = truckRepository.getById(fr.getTrucks().getId());
+                truck.setRegNumber(truck.getRegNumber());
+                truckRepository.save(truck);
             }
             return formRepository.findAll();
         }

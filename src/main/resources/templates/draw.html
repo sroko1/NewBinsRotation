@@ -42,7 +42,7 @@
 <div class="container">
     <div class="row" style="margin-top:20px">
         <div class="col-xs12 col-sm8 col-md6 col-sm-offset-2 col-md-offset3">
-            <form th:action="@{saveForm}" th:object="${form}" method="post">
+            <form th:action="@{/form/build}" th:object="${form}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label>
@@ -130,11 +130,11 @@
                         <label>
                             <input type="date" th:field="*{inbounds}"
                                    class="form-control input-lg"
-                                   placeholder="checkedAt"
+                                   placeholder="inbound.checkedAt"
                                    required="true">
                         </label>
                         <span th:if="${#fields.hasErrors('inbounds')}"
-                              th:errors="*{checkedAt}"
+                              th:errors="*{inbound.checkedAt}"
                               class="text-danger">
                             Date Error
                         </span>
@@ -148,11 +148,11 @@
                         <label>
                             <input type="text" th:field="*{trucks}"
                                    class="form-control input-lg"
-                                   placeholder="regNumber"
+                                   placeholder="truck.regNumber"
                                    required="true">
                         </label>
                         <span th:if="${#fields.hasErrors('trucks')}"
-                              th:errors="*{regNumber}"
+                              th:errors="*{truck.regNumber}"
                               class="text-danger">
                                   Registration No. Error
                                 </span>

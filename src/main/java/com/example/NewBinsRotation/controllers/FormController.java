@@ -28,8 +28,8 @@ public class FormController {
     public FormController(FormService formService, InboundService inboundService,
                           BinFeatureService binFeatureService, TruckService truckService, SupplierService supplierService) {
         this.formService = formService;
-        this.inboundService = inboundService;
         this.binFeatureService = binFeatureService;
+        this.inboundService = inboundService;
         this.truckService = truckService;
         this.supplierService = supplierService;
     }
@@ -53,7 +53,7 @@ public class FormController {
     }
 
     @RequestMapping("/paginated")
-    public String getFormPaginated(Model model,
+    public String getFormsPaginated(Model model,
                                    @RequestParam("page") Optional<Integer> page) {
         int currentPage = page.orElse(1);
         Page<Form> formPage = formService
@@ -76,19 +76,16 @@ public class FormController {
     }
 
     @PostMapping("/update")
-    public String editForm(@RequestParam int id, Form form, BindingResult result, Model model) {
+    public String editForm(@RequestParam Integer id, Form form, Model model, BindingResult result) {
         if (result.hasErrors()) {
             return "newInForm";
         } else {
             model.addAttribute("form", formService.getFormById(id));
 
+            model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
             model.addAttribute("inbounds", inboundService.getAllInbound());
 
-           // model.addAttribute("outbounds", outboundService.getAllOutbound());
-
             model.addAttribute("trucks", truckService.getAllTruck());
-
-            model.addAttribute("binFeatures", binFeatureService.getAllBinFeature());
 
             model.addAttribute("suppliers", supplierService.getAllSuppliers());
         }
@@ -99,7 +96,6 @@ public class FormController {
     public String addNewForm(Model model ) {
         model.addAttribute("form", new Form());
         model.addAttribute("inbounds", inboundService.getAllInbound());
-      //  model.addAttribute("outbounds", outboundService.getAllOutbound());
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
         model.addAttribute("trucks", truckService.getAllTruck());
         model.addAttribute("suppliers", supplierService.getAllSuppliers());
@@ -119,9 +115,10 @@ public class FormController {
     }
 
     @PostMapping("/saveForm")
-    public String saveData( Form form) {
-        //formService.getFormById(id);
-        formService.updateForm(form);
+    public String saveForm( @RequestParam Integer id, Form form) {
+      formService.findById(id);
+        formService.editForm(form);
+        formService.addNewForm(id);
 
 
         return "redirect:paginated";

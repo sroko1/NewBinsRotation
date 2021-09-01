@@ -54,7 +54,7 @@ public class OutFormServiceImpl implements OutFormService {
     }
 
     @Override
-    public void updateOutForm(OutForm outForm) {
+    public void editOutForm(OutForm outForm) {
         outFormRepository.save(outForm);
 
     }

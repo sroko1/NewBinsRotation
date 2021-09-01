@@ -35,6 +35,7 @@ public class Truck implements Serializable {
 
 
 
+
     //@OneToMany(mappedBy = "trucks")
     //private List<Inbound>inbounds;
 

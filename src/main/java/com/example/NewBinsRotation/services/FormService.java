@@ -17,9 +17,9 @@ public interface FormService {
 
     void saveForm(Form form);
 
-    void updateForm(Form form);
+    void editForm(Form form);
 
-    Form findById(int id);
+    Form findById(Integer id);
 
     void save(int id);
 

@@ -20,6 +20,7 @@
         <thead>
         <tr>
             <th><span th:text="#{label.outForm.id}"></span></th>
+            <th><span th:text="#{label.outForm.outboundLocation}"></span></th>
             <th><span th:text="#{label.outForm.binFeature.binName}"></span></th>
             <th><span th:text="#{label.outForm.amount}"></span></th>
             <th><span th:text="#{label.outForm.type}"></span></th>
@@ -32,6 +33,7 @@
         <tbody>
         <tr th:unless="${outForm == null}" th:each="outForm: ${outFormPage.content}">
             <td><span th:text="${outForm.id}"></span></td>
+            <td><span th:text="${outForm.outbounds.location}"></span></td>
             <td><span th:text="${outForm.binFeatures.name}"></span></td>
             <td><span th:text="${outForm.amount}"></span></td>
             <td><span th:text="${outForm.outbounds.type}"></span></td>

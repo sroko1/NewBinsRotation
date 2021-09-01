@@ -20,25 +20,27 @@
     <thead>
     <tr>
       <th><span th:text="#{label.form.id}"></span></th>
+      <th><span th:text="#{label.form.inboundLocation}"></span></th>
       <th><span th:text="#{label.form.binFeature.binName}"></span></th>
       <th><span th:text="#{label.form.amount}"></span></th>
       <th><span th:text="#{label.form.type}"></span></th>
+      <th><span th:text="#{label.form.supplierName}"></span></th>
       <th><span th:text="#{label.form.trailerType}"></span></th>
       <th><span th:text="#{label.form.checkedAt}"></span></th>
       <th><span th:text="#{label.form.truckRegNumber}"></span></th>
-      <th><span th:text="#{label.form.supplierName}"></span></th>
     </tr>
     </thead>
     <tbody>
     <tr th:unless="${form == null}" th:each="form: ${formPage.content}">
       <td><span th:text="${form.id}"></span></td>
+      <td><span th:text="${form.inbounds.location}"></span></td>
       <td><span th:text="${form.binFeatures.name}"></span></td>
       <td><span th:text="${form.amount}"></span></td>
       <td><span th:text="${form.inbounds.type}"></span></td>
+      <td><span th:text="${form.suppliers.name}"></span></td>
       <td><span th:text="${form.trucks.trailerType}"></span></td>
       <td><span th:text="${form.inbounds.checkedAt}"></span></td>
       <td><span th:text="${form.trucks.regNumber}"></span></td>
-      <td><span th:text="${form.suppliers.name}"></span></td>
       </td>
       <td>
         <form th:action="@{update}" method="post">
