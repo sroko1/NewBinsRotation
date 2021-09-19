@@ -21,7 +21,7 @@ is a division into Inbound and Outbound processes.
     - edit
 #### Inform 
  - contains all data from class Inbound
-#### OuForm
+#### OutForm
  - contains all data from class Outbound
       
 
