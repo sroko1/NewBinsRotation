@@ -30,7 +30,7 @@ public class Outbound implements Serializable {
     private double volumeAmount;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH})
+   /* @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name= "bin_feat_outbounds",
             joinColumns = @JoinColumn(name = "bin_features_ID"),
@@ -41,4 +41,5 @@ public class Outbound implements Serializable {
     @ManyToOne
     @JoinColumn(name = "O_ID",insertable = false, updatable = false)
     private Truck truck;
+*/
 }

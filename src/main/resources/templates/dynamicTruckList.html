@@ -25,6 +25,7 @@
   <table class="table">
     <thead>
     <tr>
+      <th><span th:text="#{label.truck.id}"></span></th>
       <th><span th:text="#{label.truck.trailerType}"></span></th>
       <th><span th:text="#{label.truck.regNumber}"></span></th>
       <th><span th:text="#{label.truck.trailerMaxVolume}"></span></th>
@@ -32,6 +33,7 @@
     </thead>
     <tbody>
     <tr th:unless="${truck == null}" th:each="truck : ${trucks}">
+      <td><span th:text="${truck.id}"></span></td>
       <td><span th:text="${truck.trailerType}"></span></td>
       <td><span th:text="${truck.regNumber}"></span></td>
       <td><span th:text="${truck.trailerMaxVolume}"></span></td>

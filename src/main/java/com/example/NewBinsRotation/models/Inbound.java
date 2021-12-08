@@ -32,7 +32,10 @@ public class Inbound implements Serializable {
     @Column(name = "VOLUME_AMOUNT")
     private double volumeAmount;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "inbound")
+    private List<Form> forms;
+
+    /*@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "bin_feat_inbounds",
             joinColumns = @JoinColumn(name = "bin_features_ID"),
@@ -44,6 +47,6 @@ public class Inbound implements Serializable {
     @ManyToOne
     @JoinColumn(name = "I_ID",insertable = false, updatable = false)
     private Truck truck;
-
+*/
 
 }

@@ -25,15 +25,11 @@ import java.util.Optional;
 public class InboundController {
 
 
-    private final TruckService truckService;
 
-    private final BinFeatureService binFeatureService;
 
     private final InboundService inboundService;
 
-    public InboundController(TruckService truckService, BinFeatureService binFeatureService, InboundService inboundService) {
-        this.truckService = truckService;
-        this.binFeatureService = binFeatureService;
+    public InboundController( InboundService inboundService) {
         this.inboundService = inboundService;
     }
 
@@ -59,8 +55,6 @@ public class InboundController {
     @PostMapping("/edit")
     public String editInbound(@RequestParam int id, Model model) {
         model.addAttribute("inbound", inboundService.getInboundById(id));
-        model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
-        model.addAttribute("truck", truckService.getAllTruck());
         return "postInbound";
     }
 
@@ -75,15 +69,6 @@ public class InboundController {
     public String addNewInbound(Model model) {
         model.addAttribute("inbound", new Inbound());
         return "postInbound";
-    }
-
-    @GetMapping("/form")
-    public String addNewData(Model model) {
-        model.addAttribute("inbound", new Inbound());
-        model.addAttribute("inbounds", inboundService.getAllInbound());
-        model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
-        model.addAttribute("trucks", truckService.getAllTruck());
-        return "draw";
     }
 
 

@@ -71,17 +71,28 @@ public class OutFormServiceImpl implements OutFormService {
     }
 
     @Override
-    public List<OutForm> addNewOutForm(Integer id) {
+    public void addNewOutForm(Integer id) {
         Optional<OutForm> outForm = outFormRepository.findById(id);
         if (outForm.isPresent()) {
             OutForm ofr = outForm.get();
             outFormRepository.save(ofr);
 
-            BinFeature binFeature = binFeatureRepository.getById(ofr.getBinFeatures().getId());
-           binFeature.setAmount(binFeature.getAmount() - ofr.getAmount());
+            BinFeature binFeature = binFeatureRepository.getById(ofr.getBinFeatures().getAmount());
+            binFeature.setAmount(binFeature.getId());
+            binFeature.setAmount(binFeature.getAmount() + ofr.getAmount());
             binFeatureRepository.save(binFeature);
+
+            ofr.setAmount(ofr.getAmount());
+            ofr.setOutbounds(ofr.getOutbounds());
+            ofr.setBinFeatures(ofr.getBinFeatures());
+            ofr.setTrucks(ofr.getTrucks());
+            ofr.setSuppliers(ofr.getSuppliers());
+
+
+            outFormRepository.save(ofr);
+
         }
-        return outFormRepository.findAll();
+        outFormRepository.findAll();
     }
 
     @Override

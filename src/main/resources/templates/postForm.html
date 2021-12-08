@@ -42,11 +42,11 @@
 <div class="container">
     <div class="row" style="margin-top:20px">
         <div class="col-xs12 col-sm8 col-md6 col-sm-offset-2 col-md-offset3">
-            <form th:action="@{/form/saveForm}" th:object="${form}" method="post">
+            <form th:action="@{form/saveForm}" th:object="${form}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label>
-                            <select class="form-control" th:field="*{inbounds}">
+                            <select class="form-control" th:field="*{inbound}">
                                 <option value="0">Select Inbound Location</option>
                                 <option th:each="inbound : ${inbounds}" th:value="${inbound.id}"
                                         th:text="${inbound.location}"></option>
@@ -128,7 +128,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label>
-                            <input type="date" th:field="*{inbounds}"
+                            <input type="date" th:field="*{inbounds.checkedAt}"
                                    class="form-control input-lg"
                                    placeholder="inbound.checkedAt"
                                    required="true">
@@ -146,7 +146,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label>
-                            <input type="text" th:field="*{trucks}"
+                            <input type="text" th:field="*{trucks.regNumber}"
                                    class="form-control input-lg"
                                    placeholder="truck.regNumber"
                                    required="true">

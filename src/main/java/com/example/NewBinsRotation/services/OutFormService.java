@@ -25,5 +25,5 @@ public interface OutFormService {
     void save(int id);
 
     void deleteOutForm(int id);
-    List<OutForm>addNewOutForm(Integer id);
+    void addNewOutForm(Integer id);
 }

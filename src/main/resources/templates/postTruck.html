@@ -5,11 +5,11 @@
   <title>Spring MVC CRUD</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-  <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+  <link href="https://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
         th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
         rel="stylesheet" media="screen" />
 
-  <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+  <script src="https://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
           th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
 
   <link href="../static/css/spring-core.css"
@@ -23,16 +23,22 @@
   <form th:action="@{save}" th:object="${truck}" method="post">
     <div class="form-group">
       <input type="hidden" th:field="*{id}">
-      <input class="form-control" placeholder="Provide Truck Trailer Type" th:field="*{trailerType}"/>
+      <label>
+        <input class="form-control" placeholder="Provide Truck Trailer Type" th:field="*{trailerType}"/>
+      </label>
       <br/>
-      <input class="form-control" placeholder="Provide Truck Reg Number" th:field="*{regNumber}"/>
+      <label>
+        <input class="form-control" placeholder="Provide Truck Reg Number" th:field="*{regNumber}"/>
+      </label>
       <br/>
-      <input class="form-control" placeholder="Provide Truck Trailer Max Vol" th:field="*{trailerMaxVolume}"/>
+      <label>
+        <input class="form-control" placeholder="Provide Truck Trailer Max Vol" th:field="*{trailerMaxVolume}"/>
+      </label>
       <br/>
       <input type="submit" class="btn btn-primary" th:value="Save">
     </div>
   </form>
 </div>
-<div th:replace="fragments/footer :: footer" />
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

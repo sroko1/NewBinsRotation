@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,9 +27,19 @@ public class OutForm implements Serializable {
     @ManyToOne
     private BinFeature binFeatures;
     @ManyToOne
+    @JoinColumn(name = "ID",insertable = false, updatable = false)
     private Truck trucks;
     @ManyToOne
     private Outbound outbounds;
     @ManyToOne
     private Supplier suppliers;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinTable(
+            name= "out_form_bin_features",
+            joinColumns = @JoinColumn(name = "bin_features_ID"),
+            inverseJoinColumns =  @JoinColumn(name = "out_form_ID")
+    )
+    private List<BinFeature> binsFeatures;
+
 }

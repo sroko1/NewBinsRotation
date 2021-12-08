@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "binFeatures")
+@Table(name = "bin_features")
 public class BinFeature implements Serializable {
 
     @Id
@@ -29,20 +29,20 @@ public class BinFeature implements Serializable {
     private double width;
     @Column(name = "LENGTH")
     private double length;
-    @Column(name = "HEIGHT ")
+    @Column(name = "HEIGHT")
     private double height;
-    @Column(name = "PRICE ")
+    @Column(name = "PRICE")
     private double price;
-    @Column(name = "AMOUNT ")
+    @Column(name = "AMOUNT")
     private int amount;
-    @Column(name = "VOLUME ")
+    @Column(name = "VOLUME")
     private double volume;
-    @Column(name = "LEASING_PRICE ")
+    @Column(name = "LEASING_PRICE")
     private double leasingPrice;
 
 
 
-    @ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH})
+    /*@ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH})
     @JoinTable(name = "bin_feat_inbounds",
             joinColumns = {
                     @JoinColumn(name = "bin_features_ID", referencedColumnName = "ID",
@@ -64,7 +64,7 @@ public class BinFeature implements Serializable {
                             nullable = false)})
     private List<Outbound> outbounds;
 
-
+*/
 
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH})
@@ -80,9 +80,9 @@ public class BinFeature implements Serializable {
 
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH})
-    @JoinTable(name = "outForm_bin_features",
+    @JoinTable(name = "out_form_bin_features",
             joinColumns ={
-                    @JoinColumn(name = "outForm_ID", referencedColumnName =  "ID",
+                    @JoinColumn(name = "out_form_ID", referencedColumnName =  "ID",
                             nullable = false)},
             inverseJoinColumns = {
                     @JoinColumn(name = "bin_features_ID", referencedColumnName = "ID",

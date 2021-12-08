@@ -2,12 +2,12 @@ package com.example.NewBinsRotation.services;
 
 import com.example.NewBinsRotation.models.BinFeature;
 import com.example.NewBinsRotation.models.Form;
-import com.example.NewBinsRotation.models.Inbound;
 import com.example.NewBinsRotation.models.Truck;
 import com.example.NewBinsRotation.repositories.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -73,24 +73,36 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
-    public List<Form> addNewForm(Integer id) {
+    @Transactional
+    public void addNewForm(Integer id) {
         Optional<Form> form = formRepository.findById(id);
         if (form.isPresent()) {
             Form fr = form.get();
+            fr.setInbound(fr.getInbound());
+            fr.setAmount(fr.getAmount());
+            fr.setBinFeatures(fr.getBinFeatures());
+            fr.setTrucks(fr.getTrucks());
+            fr.setSuppliers(fr.getSuppliers());
             formRepository.save(fr);
 
-            BinFeature binFeature = binFeatureRepository.getById(fr.getBinFeatures().getId());
-            binFeature.setId(binFeature.getId());
-                binFeature.setAmount(binFeature.getAmount() + fr.getAmount());
-                binFeatureRepository.save(binFeature);
-                Truck truck = truckRepository.getById(fr.getTrucks().getId());
-                truck.setRegNumber(truck.getRegNumber());
-                truckRepository.save(truck);
+
+
+            BinFeature binFeature = binFeatureRepository.getById(fr.getBinFeatures().getAmount());
+            binFeature.setAmount(binFeature.getId());
+            binFeature.setAmount(binFeature.getAmount() + fr.getAmount());
+            binFeatureRepository.save(binFeature);
+
+            Truck truck = truckRepository.findTruckByRegNumber(fr.getTruck().getRegNumber());
+            truck.setRegNumber(truck.getRegNumber());
+
+            truckRepository.save(truck); // tu
+
             }
-            return formRepository.findAll();
-        }
+        formRepository.findAll();
+    }
 
         @Override
+        @Transactional
         public void deleteForm ( int id){
             Form form = formRepository.findById(id);
             BinFeature binFeature = binFeatureRepository.getById(form.getBinFeatures().getId());

@@ -33,14 +33,14 @@
     <tbody>
     <tr th:unless="${form == null}" th:each="form: ${formPage.content}">
       <td><span th:text="${form.id}"></span></td>
-      <td><span th:text="${form.inbounds.location}"></span></td>
+      <td><span th:text="${form.inbound.location}"></span></td>
       <td><span th:text="${form.binFeatures.name}"></span></td>
       <td><span th:text="${form.amount}"></span></td>
-      <td><span th:text="${form.inbounds.type}"></span></td>
+      <td><span th:text="${form.inbound.type}"></span></td>
       <td><span th:text="${form.suppliers.name}"></span></td>
-      <td><span th:text="${form.trucks.trailerType}"></span></td>
-      <td><span th:text="${form.inbounds.checkedAt}"></span></td>
-      <td><span th:text="${form.trucks.regNumber}"></span></td>
+      <td><span th:text="${form.truck.trailerType}"></span></td>
+      <td><span th:text="${form.inbound.checkedAt}"></span></td>
+      <td><span th:text="${form.truck.regNumber}"></span></td>
       </td>
       <td>
         <form th:action="@{update}" method="post">

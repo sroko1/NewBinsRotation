@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>TRUCKS DATA</title>
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><span th:text="#{label.truck.id}"></span></th>
+            <th><span th:text="#{label.truck.trailerType}"></span></th>
+            <th><span th:text="#{label.truck.regNumber}"></span></th>
+            <th><span th:text="#{label.truck.trailerMaxVolume}"></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="truck : ${truckPage.content}">
+            <td><span th:text="${truck.id}"></span></td>
+            <td><span th:text="${truck.trailerType}"></span></td>
+            <td><span th:text="${truck.regNumber}"></span></td>
+            <td><span th:text="${truck.trailerMaxVolume}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${truckPage.totalPages > 0}" class="pagination"
+         th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/trucks/paginated(page=${pageNumber})}"
+           th:text="${pageNumber}"></a>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

@@ -2,6 +2,8 @@ package com.example.NewBinsRotation.controllers;
 
 
 import com.example.NewBinsRotation.models.Form;
+import com.example.NewBinsRotation.models.Inbound;
+import com.example.NewBinsRotation.models.Truck;
 import com.example.NewBinsRotation.services.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -81,6 +83,9 @@ public class FormController {
             return "newInForm";
         } else {
             model.addAttribute("form", formService.getFormById(id));
+            model.addAttribute("truck",truckService.getTruckById(id));
+            model.addAttribute("inbound", inboundService.getInboundById(id));
+           // model.addAttribute("form", formService.getAllForm()); /// tutaj
 
             model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
             model.addAttribute("inbounds", inboundService.getAllInbound());
@@ -93,8 +98,12 @@ public class FormController {
     }
 
     @GetMapping("/build")
+
     public String addNewForm(Model model ) {
         model.addAttribute("form", new Form());
+       // model.addAttribute("truck", new Truck());
+       // model.addAttribute("inbound", new Inbound());
+       // model.addAttribute("form", formService.getAllForm());
         model.addAttribute("inbounds", inboundService.getAllInbound());
         model.addAttribute("binsFeatures", binFeatureService.getAllBinFeature());
         model.addAttribute("trucks", truckService.getAllTruck());
@@ -104,22 +113,30 @@ public class FormController {
     }
 
     @PostMapping("/build")
-    public String registerForm(@Valid Form form, BindingResult result) {
+    public String registerForm(@Valid Form form, BindingResult result, Truck truck, Inbound inbound) {
         if (result.hasErrors()) {
             return "draw";
         } else {
             formService.saveForm(form);
-            return "redirect:paginated";
+            truckService.save(truck);
+            inboundService.save(inbound);
+
+            return "newInForm";
         }
 
     }
 
     @PostMapping("/saveForm")
-    public String saveForm( @RequestParam Integer id, Form form) {
-      formService.findById(id);
+    public String saveForm( @RequestParam Integer id, @RequestParam String regNumber,
+                            Form form, Truck truck, Inbound inbound) {
+      formService.getFormById(id);
         formService.editForm(form);
-        formService.addNewForm(id);
 
+        truckService.findByRegNumber(regNumber);
+      // truckService.getTruckById(id);
+        truckService.editTruck(truck);
+        inboundService.getInboundById(id);
+        inboundService.editInbound(inbound);
 
         return "redirect:paginated";
     }

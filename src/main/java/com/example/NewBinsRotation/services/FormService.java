@@ -1,7 +1,6 @@
 package com.example.NewBinsRotation.services;
 
 import com.example.NewBinsRotation.models.Form;
-import com.example.NewBinsRotation.models.Inbound;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -24,6 +23,6 @@ public interface FormService {
     void save(int id);
 
     void deleteForm(int id);
-    List<Form>addNewForm(Integer id);
+    void addNewForm(Integer id);
 }
 

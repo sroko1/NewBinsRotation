@@ -13,5 +13,7 @@ public interface TruckRepository extends JpaRepository<Truck, Integer> {
    Truck findById(int id);
 
     void save(int id);
+
+    Truck findTruckByRegNumber(String regNumber);
 }
 

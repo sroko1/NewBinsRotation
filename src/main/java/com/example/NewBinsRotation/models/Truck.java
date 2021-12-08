@@ -22,27 +22,24 @@ public class Truck implements Serializable {
     private int id;
     @Column(name = "TRAILER_TYPE")
     private String trailerType;
-    @Column (name = "REG_NUMBER")
+    @Column(name = "REG_NUMBER")
     private String regNumber;
-    @Column (name = "TRAILER_WIDTH")
+    @Column(name = "TRAILER_WIDTH")
     private double trailerWidth;
-    @Column (name = "TRAILER_LENGTH")
-    private double  trailerLength;
-    @Column (name = "TRAILER_HEIGHT")
+    @Column(name = "TRAILER_LENGTH")
+    private double trailerLength;
+    @Column(name = "TRAILER_HEIGHT")
     private double trailerHeight;
-    @Column (name = "TRAILER_MAX_VOLUME")
+    @Column(name = "TRAILER_MAX_VOLUME")
     private double trailerMaxVolume;
 
 
+    @ManyToMany(mappedBy = "trucks")
+    private List<Form> forms;
 
 
-    //@OneToMany(mappedBy = "trucks")
-    //private List<Inbound>inbounds;
-
-
-
-    //@OneToMany(mappedBy = "trucks")
-   // private List<Outbound>outbounds;
+   @OneToMany(mappedBy = "trucks")
+    private List<OutForm> outForms;
 
 
 }

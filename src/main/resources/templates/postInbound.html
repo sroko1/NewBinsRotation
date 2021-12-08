@@ -23,11 +23,17 @@
     <form th:action="@{save}" th:object="${inbound}" method="post">
         <div class="form-group">
             <input type="hidden" th:field="*{id}">
-            <input class="form-control" placeholder="Provide Inbound Type" th:field="*{type}"/>
+            <label>
+                <input class="form-control" placeholder="Provide Inbound Type" th:field="*{type}"/>
+            </label>
             <br/>
-            <input class="form-control" placeholder="Provide Inbound Checked At" th:field="*{checkedAt}"/>
+            <label>
+                <input class="form-control" placeholder="Provide Inbound Checked At" th:field="*{checkedAt}"/>
+            </label>
             <br/>
-            <input class="form-control" placeholder="Provide Inbound Amount" th:field="*{amount}"/>
+            <label>
+                <input class="form-control" placeholder="Provide Inbound Volume Amount" th:field="*{volumeAmount}"/>
+            </label>
             <br/>
             <input class="form-control" placeholder="Provide Inbound Location" th:field="*{location}"/>
             <br/>
